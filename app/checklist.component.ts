@@ -2,6 +2,7 @@ import { Component, Input, OnInit }		from '@angular/core';
 
 import { Checklist }		from './checklist';
 import { ChecklistItem }	from './checklist-item';
+import { ChecklistService }	from './checklist.service';
 
 @Component({
 	selector: 'checklist',
@@ -9,23 +10,27 @@ import { ChecklistItem }	from './checklist-item';
 })
 export class ChecklistComponent implements OnInit {
 	checklist: Checklist;
+	items: ChecklistItem[];
 	newItem = '';
 	
+	constructor(public checklistService: ChecklistService) { }
+	
 	ngOnInit(): void {
-		this.checklist = new Checklist(0,
-			'First Checklist',
-			[
-				new ChecklistItem(1, false, 'Item 1'),
-				new ChecklistItem(2, true, 'Item 2'),
-				new ChecklistItem(3, false, 'Item 3'),
-				new ChecklistItem(4, false, 'Item 4')
-			]
-		);
+		this.getChecklist();
+	}
+	
+	getChecklist() : void {
+		this.checklistService
+				.getChecklist(0)
+				.then(checklist => {
+					this.checklist = checklist;
+					this.items = checklist.items;
+				});
 	}
 	
 	addItem(): void {
 		var length = this.checklist.items.length + 1;
-		this.checklist.items.push(new ChecklistItem(length, false, this.newItem));
+		this.checklist.items.push({id: length, checked: false, description: this.newItem });
 		this.newItem = '';
 	}
 	

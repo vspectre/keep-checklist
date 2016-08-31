@@ -1,7 +1,5 @@
 export class ChecklistItem {
-	constructor(
-		public id: number,
-		public checked: boolean,
-		public description: string
-	) { }
+	id: number;
+	checked: boolean;
+	description: string;
 }

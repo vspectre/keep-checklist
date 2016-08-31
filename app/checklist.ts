@@ -1,9 +1,11 @@
 import { ChecklistItem }	from './checklist-item';
 
 export class Checklist {
-	constructor(
-		public id: number,
-		public name: string,
-		public items?: ChecklistItem[]
-	) { }
+	id: number;
+	name: string;
+	items: ChecklistItem[];
+	
+	constructor() {
+		this.items = [];
+	}
 }
