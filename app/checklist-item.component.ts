@@ -1,6 +1,6 @@
-import { Component, Input }    from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ChecklistItem }    from './checklist-item'; 
+import { ChecklistItem }        from './checklist-item';
 
 @Component({
     selector: 'checklist-item',
@@ -8,6 +8,4 @@ import { ChecklistItem }    from './checklist-item';
 })
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
-
-    
 }

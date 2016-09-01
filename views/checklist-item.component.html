@@ -1,1 +1,2 @@
-<input type="checkbox"> {{item.description}} <button (click)="remove()">x</button>
+<input type="checkbox" [(ngModel)]="item.checked">
+<input type="text" [(ngModel)]="item.description">

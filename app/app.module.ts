@@ -11,9 +11,14 @@ import { InMemoryDataService } 	from './in-memory-data.service';
 
 import { AppComponent }				from './app.component';
 import { ChecklistComponent }		from './checklist.component';
+import { ChecklistItemsComponent }	from './checklist-items.component';
 import { ChecklistItemComponent }	from './checklist-item.component';
 
-import { ChecklistService }		from './checklist.service';
+import { ChecklistService }			from './checklist.service';
+
+import { ChecklistItemService }		from './checklist-item.service';
+import { ChecklistItemApiService }	from './checklist-item-api.service';
+import { ChecklistItemSplitService } from './checklist-item-split.service';
 
 @NgModule({
 	imports: [
@@ -24,10 +29,12 @@ import { ChecklistService }		from './checklist.service';
 	declarations: [ 
 		AppComponent,
 		ChecklistComponent,
-		ChecklistItemComponent
+		ChecklistItemsComponent,
+		ChecklistItemComponent,
 	],
 	providers: [
 		ChecklistService,
+		{ provide: ChecklistItemService, useClass: ChecklistItemSplitService },
 		{ provide: XHRBackend, useClass: InMemoryBackendService },
 		{ provide: SEED_DATA, useClass: InMemoryDataService },
 	],

@@ -1,3 +1,5 @@
+import { CHECKLISTS }   from './mock-checklists';
+
 export class InMemoryDataService {
     createDb() {
         let checklists = [

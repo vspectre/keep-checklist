@@ -2,31 +2,16 @@ import { Component, Input, OnInit }		from '@angular/core';
 
 import { Checklist }		from './checklist';
 import { ChecklistItem }	from './checklist-item';
-import { ChecklistService }	from './checklist.service';
 
 @Component({
 	selector: 'checklist',
 	templateUrl: 'views/checklist.component.html'
 })
-export class ChecklistComponent implements OnInit {
-	checklist: Checklist;
-	items: ChecklistItem[];
+export class ChecklistComponent {
+	@Input() checklist: Checklist;
 	newItem = '';
 	
-	constructor(public checklistService: ChecklistService) { }
-	
-	ngOnInit(): void {
-		this.getChecklist();
-	}
-	
-	getChecklist() : void {
-		this.checklistService
-				.getChecklist(0)
-				.then(checklist => {
-					this.checklist = checklist;
-					this.items = checklist.items;
-				});
-	}
+	get diagnostics() { return JSON.stringify(this.checklist); }
 	
 	addItem(): void {
 		var length = this.checklist.items.length + 1;

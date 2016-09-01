@@ -1,13 +1,10 @@
 <div *ngIf="checklist">
 	<h3>{{ checklist.name }}</h3>
-	<div *ngIf="items">
-		<ul>
-			<li *ngFor="let item of items">
-				<input type="checkbox"> {{item.description}} <button (click)="remove(item.id)">x</button>
-			</li>
-		</ul>
+	<div *ngIf="checklist.items">
+		<checklist-items [(items)]="checklist.items"></checklist-items>
 		<div>
 			<input type="text" [(ngModel)]="newItem" (keyup.enter)="addItem()" />
 		</div>
 	</div>
+	<p>{{ diagnostics }}</p>
 </div>
