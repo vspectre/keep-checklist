@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let item of items">
+        <checklist-item (deleteRequest)="remove($event)" [item]="item"></checklist-item>
+    </li>
+</ul>

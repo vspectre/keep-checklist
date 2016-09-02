@@ -10,15 +10,15 @@ import { InMemoryBackendService, SEED_DATA }	from 'angular2-in-memory-web-api';
 import { InMemoryDataService } 	from './in-memory-data.service';
 
 import { AppComponent }				from './app.component';
-import { ChecklistComponent }		from './checklist.component';
-import { ChecklistItemsComponent }	from './checklist-items.component';
-import { ChecklistItemComponent }	from './checklist-item.component';
+import { ChecklistComponent }		from './checklists/checklist/checklist.component';
+import { ChecklistItemsComponent }	from './checklists/checklist-items/checklist-items.component';
+import { ChecklistItemComponent }	from './checklists/checklist-item/checklist-item.component';
 
-import { ChecklistService }			from './checklist.service';
+import { ChecklistService }			from './checklists/shared/checklist.service';
 
-import { ChecklistItemService }		from './checklist-item.service';
-import { ChecklistItemApiService }	from './checklist-item-api.service';
-import { ChecklistItemSplitService } from './checklist-item-split.service';
+import { ChecklistItemService }		from './checklists/shared/checklist-item.service';
+import { ChecklistItemApiService }	from './checklists/shared/checklist-item-api.service';
+import { ChecklistItemSplitService } from './checklists/shared/checklist-item-split.service';
 
 @NgModule({
 	imports: [

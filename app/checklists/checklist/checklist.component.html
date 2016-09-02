@@ -1,0 +1,8 @@
+<div *ngIf="checklist">
+	<h3>{{ checklist.name }}</h3>
+	<checklist-items [(items)]="checklist.items"></checklist-items>
+	<div>
+		<input type="text" [(ngModel)]="newItem" (keyup.enter)="addItem()">
+	</div>
+	<p>{{ checklist | json }}</p>
+</div>

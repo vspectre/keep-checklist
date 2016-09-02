@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
 
-import { ChecklistItem }        from './checklist-item';
-import { ChecklistItemService}  from './checklist-item.service';
+import { ChecklistItem, ChecklistItemService }  from '../';
 
 @Component({
     selector: 'checklist-items',
-    templateUrl: 'views/checklist-items.component.html'
+    templateUrl: 'app/checklists/checklist-items/checklist-items.component.html'
 })
 export class ChecklistItemsComponent {
     @Input()items: ChecklistItem[];
 
-    constructor(public checklistItemService: ChecklistItemService) { }
+    constructor(private checklistItemService: ChecklistItemService) { }
 
     remove(item: ChecklistItem): void {
         this.checklistItemService

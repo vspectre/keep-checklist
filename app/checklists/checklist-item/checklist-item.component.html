@@ -1,0 +1,5 @@
+<span>
+    <input type="checkbox" [(ngModel)]="item.checked">
+    <input type="text" [(ngModel)]="item.description" [class.checked]="item.checked">
+    <button (click)="remove()">x</button>
+</span>

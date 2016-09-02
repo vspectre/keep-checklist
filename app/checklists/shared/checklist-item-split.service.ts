@@ -7,7 +7,7 @@ import { ChecklistService }     from './checklist.service';
 
 @Injectable()
 export class ChecklistItemSplitService implements ChecklistItemService {
-    constructor(public checklistService: ChecklistService) { }
+    constructor(private checklistService: ChecklistService) { }
 
     delete(item: ChecklistItem): Promise<any> {
         return this.checklistService

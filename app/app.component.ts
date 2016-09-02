@@ -1,17 +1,16 @@
 import { Component, OnInit }	from '@angular/core';
 
-import { Checklist }			from './checklist';
-import { ChecklistService }		from './checklist.service';
+import { Checklist, ChecklistService }	from './checklists';
 
 @Component({
 	selector: 'keep-checklist',
-	templateUrl: 'views/app.component.html'
+	templateUrl: 'app/app.component.html'
 })
 export class AppComponent {
 	title = 'Keep Checklist in Ng2';
 	checklist: Checklist;
 	
-	constructor(public checklistService: ChecklistService) { }
+	constructor(private checklistService: ChecklistService) { }
 	
 	ngOnInit(): void {
 		this.getChecklist();

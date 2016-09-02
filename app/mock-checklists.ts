@@ -1,5 +1,5 @@
-import { Checklist }		from './checklist';
-import { ChecklistItem }	from './checklist-item';
+import { Checklist }		from './checklists/';
+import { ChecklistItem }	from './checklists/';
 
 export const CHECKLISTS: Checklist[] = [
 	{ id: 0, name: 'First Checklist', items: [

@@ -11,7 +11,7 @@ export class ChecklistItemApiService implements ChecklistItemService {
 	
 	private checklistItemsUrl = 'app/checklists/0/items';	// URL to web api
 	
-	constructor(public http: Http) { }
+	constructor(private http: Http) { }
 
     delete(item: ChecklistItem) {
         let headers = new Headers({
