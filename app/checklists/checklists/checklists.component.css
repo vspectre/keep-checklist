@@ -1,0 +1,7 @@
+.panel-group .panel + .panel {
+    margin-left: 10px;
+}
+
+.panel-group .panel {
+    display: inline-block;
+}
