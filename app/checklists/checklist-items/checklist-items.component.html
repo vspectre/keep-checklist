@@ -1,5 +1,4 @@
-<ul>
-    <li *ngFor="let item of items">
-        <checklist-item (deleteRequest)="remove($event)" [item]="item"></checklist-item>
-    </li>
-</ul>
+<checklist-item class="list-group-item"
+        *ngFor="let item of items"
+        (deleteRequest)="remove($event)" 
+        [item]="item"></checklist-item>

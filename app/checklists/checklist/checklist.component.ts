@@ -4,11 +4,12 @@ import { Checklist, ChecklistItem }		from '../';
 
 @Component({
 	selector: 'checklist',
-	templateUrl: 'app/checklists/checklist/checklist.component.html'
+	templateUrl: 'app/checklists/checklist/checklist.component.html',
 })
 export class ChecklistComponent {
 	@Input() checklist: Checklist;
 	newItem = '';
+	newItemHolder = 'List item';
 	
 	addItem(): void {
 		var length = this.checklist.items.length + 1;

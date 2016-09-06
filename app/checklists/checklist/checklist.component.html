@@ -1,8 +1,15 @@
-<div *ngIf="checklist">
-	<h3>{{ checklist.name }}</h3>
-	<checklist-items [(items)]="checklist.items"></checklist-items>
-	<div>
-		<input type="text" [(ngModel)]="newItem" (keyup.enter)="addItem()">
+<div class="panel panel-default">
+<div *ngIf="checklist" class="panel-body">
+	<input type="text" [(ngModel)]="checklist.name" class="input-large">
+	<div class="list-group">
+		<checklist-items [(items)]="checklist.items"></checklist-items>
+		<div class="list-group-item">
+			<span class="glyphicon glyphicon-plus"></span>
+			<input type="text" [(ngModel)]="newItem"
+					[placeholder]="newItemHolder" (keyup.enter)="addItem()">
+		</div>
 	</div>
-	<p>{{ checklist | json }}</p>
+
+	<br><br><p>{{ checklist | json }}</p>
+</div>
 </div>

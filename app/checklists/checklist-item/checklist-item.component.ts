@@ -12,6 +12,12 @@ export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
+    isActive: boolean = false;
+
+    active(isActive: boolean): void {
+        this.isActive = isActive;
+    }
+    
     remove() {
         this.deleteRequest.emit(this.item);
     }

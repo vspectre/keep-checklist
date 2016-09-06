@@ -1,5 +1,10 @@
 <span>
-    <input type="checkbox" [(ngModel)]="item.checked">
-    <input type="text" [(ngModel)]="item.description" [class.checked]="item.checked">
-    <button (click)="remove()">x</button>
+    <span (focus)="active(true)" (blur)="active(false)">
+        <input type="checkbox" [(ngModel)]="item.checked">
+        <input type="text" [(ngModel)]="item.description" [class.checked]="item.checked">
+        <button class="btn transparent" (click)="remove()">
+            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        </button>
+        {{ isActive }}
+    </span>
 </span>
