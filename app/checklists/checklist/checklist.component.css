@@ -1,0 +1,25 @@
+.panel {
+    color: rgba(0,0,0,.87);
+    max-width: 600px;
+    max-height: 85%;
+}
+
+.list-group {
+    overflow-y: auto;
+}
+
+.list-group-item {
+    border: none;
+}
+
+:host >>> .glyphicon {
+    color: #666;
+}
+
+.glyphicon-plus {
+    margin-left: 20px;
+}
+
+hr {
+    margin: 2px 20px;
+}

@@ -1,23 +1,41 @@
-import { Component }                    from '@angular/core';
-import { Input, Output, EventEmitter }  from '@angular/core';
+import { Component,
+         Input,
+         Output,
+         HostListener,
+         EventEmitter,
+         state,
+         style,
+         transition,
+         animate
+    }  from '@angular/core';
 
 import { ChecklistItem }    from '../';
 
 @Component({
     selector: 'checklist-item',
     templateUrl: 'app/checklists/checklist-item/checklist-item.component.html',
-    styleUrls: [ 'app/checklists/checklist-item/checklist-item.component.css' ]
+    styleUrls: [ 'app/checklists/checklist-item/checklist-item.component.css' ],
+    animations: [ ]
 })
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
-    isActive: boolean = false;
+    editing: boolean = false;
+    focused: boolean = false;
+    active(): boolean { return this.editing || this.focused; }
 
-    active(isActive: boolean): void {
-        this.isActive = isActive;
+    @HostListener('mouseenter') onMouseEnter() {
+        this.focused = true;
     }
-    
+    @HostListener('mouseleave') onMouseLeave() {
+        this.focused = false;
+    }
+
+    activate(state: boolean): void {
+        this.editing = state;
+    }
+
     remove() {
         this.deleteRequest.emit(this.item);
     }

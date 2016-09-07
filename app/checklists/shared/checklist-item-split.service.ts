@@ -11,8 +11,9 @@ export class ChecklistItemSplitService implements ChecklistItemService {
 
     delete(item: ChecklistItem): Promise<any> {
         return this.checklistService
-            .getChecklist(0)
-            .then(checklist => {
+            .getChecklists()
+            .then(checklists => {
+                let checklist = checklists.find(c => c.items.some(i => i.id === item.id));
                 for(var i = checklist.items.length -1; i >= 0; i--) {
                 	if (checklist.items[i].id === item.id) {
                 		checklist.items.splice(i, 1);

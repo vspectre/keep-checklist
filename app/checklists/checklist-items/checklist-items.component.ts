@@ -4,7 +4,8 @@ import { ChecklistItem, ChecklistItemService }  from '../';
 
 @Component({
     selector: 'checklist-items',
-    templateUrl: 'app/checklists/checklist-items/checklist-items.component.html'
+    templateUrl: 'app/checklists/checklist-items/checklist-items.component.html',
+    styleUrls: [ 'app/checklists/checklist-items/checklist-items.component.css' ]
 })
 export class ChecklistItemsComponent {
     @Input()items: ChecklistItem[];
@@ -16,10 +17,10 @@ export class ChecklistItemsComponent {
             .delete(item)
             .then(() => console.info(`item ${item.id} deleted`));
             
-            for(var i = this.items.length -1; i >= 0; i--) {
-                if (this.items[i].id === item.id) {
-                    this.items.splice(i, 1);
-                }
+        for(var i = this.items.length -1; i >= 0; i--) {
+            if (this.items[i].id === item.id) {
+                this.items.splice(i, 1);
             }
+        }
 	}
 }

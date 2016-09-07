@@ -1,5 +1,22 @@
-.checked { 
+.checklist-item {
+    line-height: 15px;
+}
+.checked {
     text-decoration: line-through;
-    color: gray;
     font-style: oblique;
+}
+.btn {
+    padding: 0;
+}
+
+.checked {
+    color: #666;
+}
+
+.glyphicon:hover {
+    color: inherit;
+}
+
+.glyphicon-move { 
+    cursor: move;
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit }            from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
+import { Router }               from '@angular/router';
 
 import { Checklist,
-         ChecklistService }             from '../shared';
+         ChecklistService }     from '../shared';
 
 @Component({
     selector: 'checklists',
@@ -11,7 +12,8 @@ import { Checklist,
 export class ChecklistsComponent implements OnInit {
     checklists: Promise<Checklist[]>;
 
-    constructor(private checklistService: ChecklistService) { }
+    constructor(private checklistService: ChecklistService,
+                private router: Router) { }
 
     ngOnInit(): void {
         this.checklists = this.checklistService.getChecklists();
@@ -19,8 +21,12 @@ export class ChecklistsComponent implements OnInit {
             checklists.forEach(checklist => {
                 if (checklist.items.length > 3) {
                     checklist.items = checklist.items.filter(item => !item.checked);
-                    checklist.items.splice(3);
                 }
             }));
+    }
+
+    gotoDetail(checklist: Checklist): void {
+        let link = [ this.router.url, checklist.id];
+        this.router.navigate(link);
     }
 }

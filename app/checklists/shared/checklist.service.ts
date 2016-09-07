@@ -14,14 +14,14 @@ export class ChecklistService {
 
 	getChecklists(): Promise<Checklist[]> {
 		return this.http.get(this.checklistsUrl)
-				.toPromise()
-				.then(response => response.json().data as Checklist[])
-				.catch(this.handleError);
+			.toPromise()
+			.then(response => response.json().data as Checklist[])
+			.catch(this.handleError);
 	}
 	
 	getChecklist(id: number) {
 		return this.getChecklists()
-				.then(checklists => checklists.find(checklist => checklist.id === id));
+			.then(checklists => checklists.find(checklist => checklist.id === id));
 	}
 
 	save(checklist: Checklist): Promise<Checklist> {
@@ -45,10 +45,10 @@ export class ChecklistService {
 		});
 
 		return this.http
-					.post(this.checklistsUrl, JSON.stringify(checklist), { headers: headers })
-					.toPromise()
-					.then(res => res.json().data)
-					.catch(this.handleError);
+			.post(this.checklistsUrl, JSON.stringify(checklist), { headers: headers })
+			.toPromise()
+			.then(res => res.json().data)
+			.catch(this.handleError);
 	}
 
 	private put(checklist: Checklist): Promise<Checklist> {
@@ -57,10 +57,10 @@ export class ChecklistService {
 		});
 		
 		return this.http
-					.put(this.checklistsUrl, JSON.stringify(checklist), {headers: headers })
-					.toPromise()
-					.then(() => checklist)
-					.catch(this.handleError);
+			.put(this.checklistsUrl, JSON.stringify(checklist), {headers: headers })
+			.toPromise()
+			.then(() => checklist)
+			.catch(this.handleError);
 	}
 
 	private handleError(error: any): Promise<any> {

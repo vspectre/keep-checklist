@@ -1,6 +1,8 @@
 <div class="panel-group">
-    <div class="panel panel-default" *ngFor="let checklist of checklists | async">
+    <div *ngFor="let checklist of checklists | async"
+         class="panel panel-default"
+         (click)="gotoDetail(checklist)">
         <div class="panel-heading">{{ checklist.name }}</div>
-        <checklist-items class="list-group" [items]="checklist.items"></checklist-items>
+        <checklist-items class="list-group" [items]="checklist.items | slice:0:3"></checklist-items>
     </div>
 </div>
