@@ -1,5 +1,8 @@
-import { Component, Input, OnInit }		from '@angular/core';
+import { Component, Input, OnInit, OnDestroy }		from '@angular/core';
 import { ActivatedRoute }				from '@angular/router';
+
+import { Subscription }			from 'rxjs/Subscription';
+
 import { Checklist,
 		 ChecklistItem,
 		 ChecklistService }		from '../';
@@ -9,7 +12,8 @@ import { Checklist,
 	templateUrl: 'app/checklists/checklist/checklist.component.html',
 	styleUrls: [ 'app/checklists/checklist/checklist.component.css' ]
 })
-export class ChecklistComponent implements OnInit {
+export class ChecklistComponent implements OnInit, OnDestroy {
+	private sub: Subscription;
 	checklist: Checklist;
 	allowEdit = true;
 	newItem = '';
@@ -22,6 +26,10 @@ export class ChecklistComponent implements OnInit {
 	
 	ngOnInit(): void {
 		this.setChecklist();
+	}
+
+	ngOnDestroy(): void {
+		this.sub.unsubscribe();
 	}
 
 	addItem(): void {
@@ -51,11 +59,13 @@ export class ChecklistComponent implements OnInit {
 	doneItems() { return this.checklist.items.filter(item => item.checked); }
 
 	private setChecklist(): void {
-		let id = parseInt(this.route.snapshot.params['id'], 10);
-		this.checklistService.getChecklist(id)
+		this.sub = this.route.params.subscribe(params => {
+			let id = +params['id'];
+			this.checklistService.getChecklist(id)
 					.then(checklist => {
 						this.checklist = checklist;
 						this.allowEdit = this.checklist.id % 2 === 0;
 					});
+		});
 	}
 }
