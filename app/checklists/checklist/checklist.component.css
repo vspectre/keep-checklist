@@ -8,7 +8,7 @@
     overflow-y: auto;
 }
 
-.list-group-item {
+:host >>> .list-group-item {
     border: none;
 }
 
@@ -23,3 +23,4 @@
 hr {
     margin: 2px 20px;
 }
+

@@ -1,6 +1,7 @@
-.checklist-item {
-    line-height: 15px;
+:host {
+    vertical-align: middle;
 }
+
 .checked {
     text-decoration: line-through;
     font-style: oblique;

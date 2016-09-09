@@ -1,7 +1,7 @@
 import { Injectable }				from '@angular/core';
 import { Headers, Http, Response }	from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import '../../rxjs-operators';
 
 import { Checklist }		from './checklist';
 
@@ -15,7 +15,7 @@ export class ChecklistService {
 	getChecklists(): Promise<Checklist[]> {
 		return this.http.get(this.checklistsUrl)
 			.toPromise()
-			.then(response => response.json().data as Checklist[])
+			.then(this.extractData)
 			.catch(this.handleError);
 	}
 	
@@ -27,7 +27,7 @@ export class ChecklistService {
 	save(checklist: Checklist): Promise<Checklist> {
 		var promise = null;
 		if (checklist.id) {
-			promise = this.post(checklist);
+			promise = this.put(checklist);
 		}
 		else {
 			promise = this.post(checklist);
@@ -47,7 +47,7 @@ export class ChecklistService {
 		return this.http
 			.post(this.checklistsUrl, JSON.stringify(checklist), { headers: headers })
 			.toPromise()
-			.then(res => res.json().data)
+			.then(this.extractData)
 			.catch(this.handleError);
 	}
 
@@ -55,12 +55,19 @@ export class ChecklistService {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
+
+		let url = `${this.checklistsUrl}/${checklist.id}`;
 		
 		return this.http
-			.put(this.checklistsUrl, JSON.stringify(checklist), {headers: headers })
+			.put(url, JSON.stringify(checklist), { headers: headers })
 			.toPromise()
 			.then(() => checklist)
 			.catch(this.handleError);
+	}
+
+	private extractData(response: Response) {
+		let json = response.json();
+		return json.data || { };
 	}
 
 	private handleError(error: any): Promise<any> {

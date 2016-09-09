@@ -20,15 +20,19 @@ export class ChecklistComponent implements OnInit {
 		private checklistService: ChecklistService) { }
 	
 	ngOnInit(): void {
-		let id = parseInt(this.route.snapshot.params['id'], 10);
-		this.checklistService.getChecklist(id)
-								.then(checklist => this.checklist = checklist);
+		this.setChecklist();
 	}
 
 	addItem(): void {
-		var length = this.checklist.items.length + 1;
-		this.checklist.items.push({id: length, checked: false, description: this.newItem });
+		let itemValue = this.newItem;
 		this.newItem = '';
+		var length = this.checklist.items.length + 1;
+		this.checklist.items.push({id: length, checked: false, description: itemValue });
+		
+		this.checklistService.save(this.checklist)
+				.then(() => {
+					console.info(`'${itemValue}' added to checklist ${this.checklist.name}`);
+				});
 	}
 
 	removeItem(item: ChecklistItem): void {
@@ -39,9 +43,15 @@ export class ChecklistComponent implements OnInit {
 		}
 
 		this.checklistService.save(this.checklist)
-							.then(() => console.info(`item ${item.id} deleted`));
+					.then(() => console.info(`item ${item.id} deleted`));
 	}
 
 	activeItems() { return this.checklist.items.filter(item => !item.checked); }
 	doneItems() { return this.checklist.items.filter(item => item.checked); }
+
+	private setChecklist(): void {
+		let id = parseInt(this.route.snapshot.params['id'], 10);
+		this.checklistService.getChecklist(id)
+					.then(checklist => this.checklist = checklist);
+	}
 }

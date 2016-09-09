@@ -1,12 +1,10 @@
-<div class="checklist-item">
-    <span style="display: inline-block; width: 15px">
+<span style="display: inline-block; width: 15px">
         <span *ngIf="active()" class="glyphicon glyphicon-move"></span>
-    </span>
-    <input type="checkbox" [(ngModel)]="item.checked">
-    <input type="text" [(ngModel)]="item.description"
-            (focus)="activate(true)" (blur)="activate(false)"
-            [class.checked]="item.checked">
-    <button *ngIf="active()" class="btn btn-lg transparent pull-right" (click)="remove()">
+</span>
+<input type="checkbox" [(ngModel)]="item.checked">
+<input type="text" [(ngModel)]="item.description"
+        (focus)="activate(true)" (blur)="activate(false)"
+        [class.checked]="item.checked">
+<button *ngIf="active()" class="btn btn-lg transparent pull-right" (click)="remove()">
         <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-    </button>
-</div>
+</button>

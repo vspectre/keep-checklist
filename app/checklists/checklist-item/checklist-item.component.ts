@@ -31,7 +31,7 @@ export class ChecklistItemComponent {
     @HostListener('mouseleave') onMouseLeave() {
         this.focused = false;
     }
-
+    
     activate(state: boolean): void {
         this.editing = state;
     }
