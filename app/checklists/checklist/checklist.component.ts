@@ -11,6 +11,7 @@ import { Checklist,
 })
 export class ChecklistComponent implements OnInit {
 	checklist: Checklist;
+	allowEdit = true;
 	newItem = '';
 	titleHolder = "Title";
 	newItemHolder = 'List item';
@@ -52,6 +53,9 @@ export class ChecklistComponent implements OnInit {
 	private setChecklist(): void {
 		let id = parseInt(this.route.snapshot.params['id'], 10);
 		this.checklistService.getChecklist(id)
-					.then(checklist => this.checklist = checklist);
+					.then(checklist => {
+						this.checklist = checklist;
+						this.allowEdit = this.checklist.id % 2 === 0;
+					});
 	}
 }

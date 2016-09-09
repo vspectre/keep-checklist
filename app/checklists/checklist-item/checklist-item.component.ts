@@ -19,19 +19,39 @@ import { ChecklistItem }    from '../';
 })
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
+    @Input()allowEdit: boolean = false;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
     editing: boolean = false;
     focused: boolean = false;
-    active(): boolean { return this.editing || this.focused; }
+    active(): boolean { return this.allowEdit && (this.editing || this.focused); }
+
+    inputClasses() {
+        let classes = {
+            checked: this.item.checked,
+            disabled: !this.allowEdit
+        };
+
+        return classes;
+    }
 
     @HostListener('mouseenter') onMouseEnter() {
-        this.focused = true;
+        this.changeFocus(true);
     }
-    @HostListener('mouseleave') onMouseLeave() {
-        this.focused = false;
+    @HostListener('mouseleave') onMouseLeave() { 
+        this.changeFocus(false);
     }
-    
+    @HostListener('focusin') onFocusIn() {
+        this.activate(true);
+    }
+    @HostListener('focusout') onFocusOut() {
+        this.activate(false);
+    }
+
+    private changeFocus(state: boolean): void {
+        this.focused = state;
+    }
+
     activate(state: boolean): void {
         this.editing = state;
     }

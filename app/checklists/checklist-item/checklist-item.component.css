@@ -5,13 +5,11 @@
 .checked {
     text-decoration: line-through;
     font-style: oblique;
-}
-.btn {
-    padding: 0;
+    color: #666;
 }
 
-.checked {
-    color: #666;
+.btn {
+    padding: 0;
 }
 
 .glyphicon:hover {

@@ -1,10 +1,12 @@
 <span style="display: inline-block; width: 15px">
         <span *ngIf="active()" class="glyphicon glyphicon-move"></span>
 </span>
-<input type="checkbox" [(ngModel)]="item.checked">
-<input type="text" [(ngModel)]="item.description"
-        (focus)="activate(true)" (blur)="activate(false)"
-        [class.checked]="item.checked">
+<input type="checkbox"
+        [(ngModel)]="item.checked" [ngClass]="inputClasses()" [disabled]="!allowEdit">
+<span [ngClass]="inputClasses()" [ngSwitch]="allowEdit">
+        <span *ngSwitchCase="false">{{ item.description }}</span>
+        <input *ngSwitchCase="true" type="text" [(ngModel)]="item.description">
+</span>
 <button *ngIf="active()" class="btn btn-lg transparent pull-right" (click)="remove()">
         <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
 </button>
