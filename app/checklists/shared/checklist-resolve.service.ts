@@ -15,7 +15,6 @@ export class ChecklistResolve implements Resolve<Checklist> {
         let id = +route.params['id'];
 
         return this.checklistService.getChecklist(id).then(checklist => {
-            console.log('hello from resolve service');
             if (checklist) {
                 return checklist;
             } else {
