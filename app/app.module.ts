@@ -6,7 +6,6 @@ import { AppComponent }			from './app.component';
 
 import { routing,
 		 appRoutingProviders }	from './app.routing';
-import { LoginComponent }		from './login/login.component';
 
 @NgModule({
 	imports: [
@@ -14,8 +13,7 @@ import { LoginComponent }		from './login/login.component';
 		routing
 	],
 	declarations: [ 
-		AppComponent,
-		LoginComponent
+		AppComponent
 	],
 	providers: [
 		appRoutingProviders

@@ -44,7 +44,7 @@ export class ChecklistsComponent implements OnInit {
     }
 
     gotoDetail(checklist: Checklist): void {
-        let link = [ this.router.url, checklist.id];
+        let link = [ 'checklists/', checklist.id];
         this.router.navigate(link);
     }
 }
