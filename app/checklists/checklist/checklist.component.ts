@@ -59,13 +59,9 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 	doneItems() { return this.checklist.items.filter(item => item.checked); }
 
 	private setChecklist(): void {
-		this.sub = this.route.params.subscribe(params => {
-			let id = +params['id'];
-			this.checklistService.getChecklist(id)
-					.then(checklist => {
-						this.checklist = checklist;
-						this.allowEdit = this.checklist.id % 2 === 0;
-					});
+		this.route.data.forEach((data: { checklist: Checklist }) => {
+			this.checklist = data.checklist;
+			this.allowEdit = this.checklist.id % 2 === 0;
 		});
 	}
 }

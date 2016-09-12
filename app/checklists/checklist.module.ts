@@ -11,6 +11,7 @@ import { ChecklistComponent }		from './checklist/checklist.component';
 import { ChecklistItemComponent }	from './checklist-item/checklist-item.component';
 
 import { ChecklistService }			from './shared/checklist.service';
+import { ChecklistResolve }         from './shared/checklist-resolve.service';
 
 @NgModule({
     imports: [ 
@@ -31,6 +32,7 @@ import { ChecklistService }			from './shared/checklist.service';
     ],
     providers: [
         ChecklistService,
+        ChecklistResolve
     ]
 })
 export class ChecklistModule { }

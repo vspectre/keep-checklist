@@ -2,7 +2,8 @@
     vertical-align: middle;
 }
 
-.checked {
+.checked input,
+.checked span {
     text-decoration: line-through;
     font-style: oblique;
     color: #666;
