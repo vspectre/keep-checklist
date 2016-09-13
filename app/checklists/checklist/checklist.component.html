@@ -4,13 +4,13 @@
 			[placeholder]="titleHolder"	[(ngModel)]="checklist.name">
 </div>
 <div class="list-group">
-	<checklist-item class="list-group-item"
+	<checklist-item class="list-group-item" keepFocus
 					[allowEdit]="allowEdit"
 					*ngFor="let item of activeItems()"
 					(deleteRequest)="removeItem($event)"
 					[item]="item"></checklist-item>
 	<span *ngIf="allowEdit">
-		<div class="list-group-item">
+		<div class="list-group-item" keepFocus>
 			<span class="glyphicon glyphicon-plus"></span>
 			<input type="text" [(ngModel)]="newItem"
 					[placeholder]="newItemHolder" (keyup.enter)="addItem()">
@@ -20,7 +20,7 @@
 			<p class="list-group-item">{{ doneItems().length }} Completed item(s)</p>
 		</span>
 	</span>
-	<checklist-item class="list-group-item"
+	<checklist-item class="list-group-item" keepFocus
 						[allowEdit]="allowEdit"
 						*ngFor="let item of doneItems()"
 						(deleteRequest)="removeItem($event)" 

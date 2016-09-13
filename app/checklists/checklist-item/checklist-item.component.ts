@@ -1,6 +1,7 @@
 import { Component,
          Input,
          Output,
+         HostBinding,
          HostListener,
          EventEmitter,
          state,
@@ -15,16 +16,15 @@ import { ChecklistItem }    from '../';
     selector: 'checklist-item',
     templateUrl: 'app/checklists/checklist-item/checklist-item.component.html',
     styleUrls: [ 'app/checklists/checklist-item/checklist-item.component.css' ],
-    animations: [ ]
+    animations: [],
 })
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
     @Input()allowEdit: boolean = false;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
-    editing: boolean = false;
-    focused: boolean = false;
-    active(): boolean { return this.allowEdit && (this.editing || this.focused); }
+    activeFocus: boolean = false;
+    active(): boolean { return this.allowEdit && (this.activeFocus); }
 
     inputClasses() {
         let classes = {
@@ -35,25 +35,8 @@ export class ChecklistItemComponent {
         return classes;
     }
 
-    @HostListener('mouseenter') onMouseEnter() {
-        this.changeFocus(true);
-    }
-    @HostListener('mouseleave') onMouseLeave() { 
-        this.changeFocus(false);
-    }
-    @HostListener('focusin') onFocusIn() {
-        this.activate(true);
-    }
-    @HostListener('focusout') onFocusOut() {
-        this.activate(false);
-    }
-
-    private changeFocus(state: boolean): void {
-        this.focused = state;
-    }
-
-    activate(state: boolean): void {
-        this.editing = state;
+    @HostListener('keepFocus', ['$event']) onFocus(state) {
+        this.activeFocus = state;
     }
 
     remove() {

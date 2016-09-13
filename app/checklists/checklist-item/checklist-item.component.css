@@ -20,3 +20,8 @@
 .glyphicon-move { 
     cursor: move;
 }
+
+.focused {
+    border-width: 2px 0px;
+    background-color: yellow;
+}

@@ -8,8 +8,13 @@
     overflow-y: auto;
 }
 
-:host >>> .list-group-item {
+:host >>> .list-group-item:not(.focused) {
     border: none;
+}
+
+.focused {
+    border-width: 1px 0px;
+    margin-bottom: 0px;
 }
 
 :host >>> .glyphicon {
