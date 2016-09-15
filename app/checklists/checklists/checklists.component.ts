@@ -8,9 +8,10 @@ import { Checklist,
          ChecklistService }     from '../shared';
 
 @Component({
-    selector: 'checklists',
-    templateUrl: 'app/checklists/checklists/checklists.component.html',
-    styleUrls: [ 'app/checklists/checklists/checklists.component.css']
+    moduleId: module.id,
+	selector: 'checklists',
+    templateUrl: 'checklists.component.html',
+    styleUrls: [ 'checklists.component.css']
 })
 export class ChecklistsComponent implements OnInit {
     checklists: Promise<Checklist[]>;

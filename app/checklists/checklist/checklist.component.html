@@ -1,6 +1,6 @@
 <div *ngIf="checklist" class="panel panel-default center-block">
 <div class="panel-heading">
-	<input type="text" class="input-lg" 
+	<input type="text" class="panel-title input-lg" 
 			[placeholder]="titleHolder"	[(ngModel)]="checklist.name">
 </div>
 <div class="list-group">
@@ -9,17 +9,17 @@
 					*ngFor="let item of activeItems()"
 					(deleteRequest)="removeItem($event)"
 					[item]="item"></checklist-item>
-	<span *ngIf="allowEdit">
+	<template [ngIf]="allowEdit">
 		<div class="list-group-item" keepFocus>
 			<span class="glyphicon glyphicon-plus"></span>
 			<input type="text" [(ngModel)]="newItem"
 					[placeholder]="newItemHolder" (keyup.enter)="addItem()">
 		</div>
-		<span *ngIf="doneItems().length > 0">
+		<template [ngIf]="doneItems().length > 0">
 			<hr>
 			<p class="list-group-item">{{ doneItems().length }} Completed item(s)</p>
-		</span>
-	</span>
+		</template>
+	</template>
 	<checklist-item class="list-group-item" keepFocus
 						[allowEdit]="allowEdit"
 						*ngFor="let item of doneItems()"

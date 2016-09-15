@@ -8,9 +8,10 @@ import { Checklist,
 		 ChecklistService }		from '../';
 
 @Component({
+	moduleId: module.id,
 	selector: 'checklist',
-	templateUrl: 'app/checklists/checklist/checklist.component.html',
-	styleUrls: [ 'app/checklists/checklist/checklist.component.css' ]
+	templateUrl: 'checklist.component.html',
+	styleUrls: [ 'checklist.component.css' ]
 })
 export class ChecklistComponent implements OnInit, OnDestroy {
 	private sub: Subscription;

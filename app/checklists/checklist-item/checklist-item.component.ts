@@ -13,9 +13,10 @@ import { Component,
 import { ChecklistItem }    from '../';
 
 @Component({
-    selector: 'checklist-item',
-    templateUrl: 'app/checklists/checklist-item/checklist-item.component.html',
-    styleUrls: [ 'app/checklists/checklist-item/checklist-item.component.css' ],
+    moduleId: module.id,
+	selector: 'checklist-item',
+    templateUrl: 'checklist-item.component.html',
+    styleUrls: [ 'checklist-item.component.css' ],
     animations: [],
 })
 export class ChecklistItemComponent {

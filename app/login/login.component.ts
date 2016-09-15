@@ -5,7 +5,8 @@ import { Router,
 import { AuthService }      from '../shared/auth.service';
 
 @Component({
-    templateUrl: 'app/login/login.component.html'
+    moduleId: module.id,
+	templateUrl: 'login.component.html'
 })
 export class LoginComponent {
     message: string;

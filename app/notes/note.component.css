@@ -1,0 +1,17 @@
+:host > div {
+    width: 60%;
+    max-width: 695px;
+}
+.timestamp,
+.timestamp > span {
+    color: lighten(color);
+    text-align: right;
+}
+
+[note-type] {
+    background-color: turquoise;
+}
+
+[note-type=list] {
+    color: red;
+}
