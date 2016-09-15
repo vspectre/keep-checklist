@@ -3,9 +3,12 @@ import { CommonModule }     from '@angular/common';
 import { FormsModule }      from '@angular/forms';
 
 import { SharedModule }     from '../shared/shared.module';
+
 import { NoteComponent }    from './note.component';
 import { NoteBodyComponent } from './note-body.component';
 import { ListBodyComponent } from './list-body.component';
+import { noteRouting, 
+         noteRoutingProviders }    from './note.routing';
 
 @NgModule({
     imports: [
@@ -14,7 +17,9 @@ import { ListBodyComponent } from './list-body.component';
         SharedModule
     ],
     exports: [
-        
+        CommonModule,
+        FormsModule,
+        SharedModule
     ],
     declarations: [
         NoteComponent,
