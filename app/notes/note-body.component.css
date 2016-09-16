@@ -1,3 +1,4 @@
-:host {
-    background-color: paleturquoise;
+textarea {
+    border: none;
+    height: 400px;
 }

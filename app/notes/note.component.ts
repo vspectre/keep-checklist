@@ -11,10 +11,8 @@ import { Note }             from './note';
 })
 export class NoteComponent implements OnInit {
     @Input()note: Note;
-    contentType;
+    @Input()allowEdit = true;
     titlePlaceHolder = "Title";
-
-    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
         this.setNote();

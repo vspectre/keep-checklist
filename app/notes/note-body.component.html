@@ -1,4 +1,6 @@
 <div>
-    <textarea [(ngModel)]="note.content" style="width: 100%">
-    </textarea>
+    <span [ngSwitch]="allowEdit">
+        <span *ngSwitchCase="false">{{ note.content }}</span>
+        <textarea *ngSwitchCase="true" [(ngModel)]="note.content" style="width: 100%"></textarea>
+    </span>
 </div>
