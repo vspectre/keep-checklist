@@ -14,7 +14,8 @@ import { noteRouting,
     imports: [
         CommonModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        noteRouting
     ],
     exports: [
         CommonModule,
@@ -30,6 +31,8 @@ import { noteRouting,
         NoteBodyComponent,
         ListBodyComponent
     ],
-    providers: [],
+    providers: [
+        noteRoutingProviders
+    ],
 })
 export class NoteModule { }

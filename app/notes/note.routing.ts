@@ -4,7 +4,6 @@ import { Routes, RouterModule }     from '@angular/router';
 import { NoteComponent }            from './note.component';
 import { NoteBodyComponent }        from './note-body.component';
 import { NoteResolve }              from './note-resolve.service';
-import { * }    from 'shared.module';
 
 const routes: Routes = [
     { path: 'note/:id', component: NoteComponent, resolve: { contentType: NoteResolve } },

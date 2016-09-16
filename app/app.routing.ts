@@ -10,7 +10,7 @@ const routes: Routes = [
       loadChildren: 'app/checklists/checklist.module#ChecklistModule',
       canActivate: [AuthGuard] },
     { path: 'login', loadChildren: 'app/login/login.module#LoginModule' },
-    { path: 'note', loadChildren: 'app/notes/note.module#NoteModule' }
+    { path: '', loadChildren: 'app/notes/note.module#NoteModule' }
 ];
 
 export const appRoutingProviders: any[] = [
