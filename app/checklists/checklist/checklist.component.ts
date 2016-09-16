@@ -3,8 +3,8 @@ import { ActivatedRoute }				from '@angular/router';
 
 import { Subscription }			from 'rxjs/Subscription';
 
-import { Checklist,
-		 ChecklistItem,
+import { Note }					from '../../notes';
+import { ChecklistItem,
 		 ChecklistService }		from '../';
 
 @Component({
@@ -15,7 +15,7 @@ import { Checklist,
 })
 export class ChecklistComponent implements OnInit, OnDestroy {
 	private sub: Subscription;
-	checklist: Checklist;
+	checklist: Note;
 	allowEdit = true;
 	newItem = '';
 	titleHolder = "Title";
@@ -62,7 +62,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 	doneItems() { return this.checklist.content.filter(item => item.checked); }
 
 	private setChecklist(): void {
-		this.route.data.forEach((data: { checklist: Checklist }) => {
+		this.route.data.forEach((data: { checklist: Note }) => {
 			this.checklist = data.checklist;
 			if (!(this.checklist.content as ChecklistItem[])) {
 				throw new TypeError('note is not a list');

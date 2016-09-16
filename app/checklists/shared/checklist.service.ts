@@ -3,7 +3,7 @@ import { Headers, Http, Response }	from '@angular/http';
 
 import '../../rxjs-operators';
 
-import { Checklist }		from './checklist';
+import { Note }		from '../../notes';
 
 @Injectable()
 export class ChecklistService {
@@ -12,7 +12,7 @@ export class ChecklistService {
 	
 	constructor(public http: Http) { }
 
-	getChecklists(): Promise<Checklist[]> {
+	getChecklists(): Promise<Note[]> {
 		return this.http.get(this.checklistsUrl)
 			.toPromise()
 			.then(this.extractData)
@@ -24,7 +24,7 @@ export class ChecklistService {
 			.then(checklists => checklists.find(checklist => checklist.id === id));
 	}
 
-	save(checklist: Checklist): Promise<Checklist> {
+	save(checklist: Note): Promise<Note> {
 		var promise = null;
 		if (checklist.id) {
 			promise = this.put(checklist);
@@ -39,7 +39,7 @@ export class ChecklistService {
 				});
 	}
 
-	private post(checklist: Checklist): Promise<Checklist> {
+	private post(checklist: Note): Promise<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
@@ -51,7 +51,7 @@ export class ChecklistService {
 			.catch(this.handleError);
 	}
 
-	private put(checklist: Checklist): Promise<Checklist> {
+	private put(checklist: Note): Promise<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});

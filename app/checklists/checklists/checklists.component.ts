@@ -4,8 +4,8 @@ import { ActivatedRoute,
 import { Observable }           from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Checklist,
-         ChecklistService }     from '../shared';
+import { Note }                 from '../../notes';
+import { ChecklistService }     from '../shared';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +14,7 @@ import { Checklist,
     styleUrls: [ 'checklists.component.css']
 })
 export class ChecklistsComponent implements OnInit {
-    checklists: Promise<Checklist[]>;
+    checklists: Promise<Note[]>;
     sessionId: Observable<string>;
     token: Observable<string>;
 
@@ -44,7 +44,7 @@ export class ChecklistsComponent implements OnInit {
             }));
     }
 
-    gotoDetail(checklist: Checklist): void {
+    gotoDetail(checklist: Note): void {
         let link = [ 'checklists/', checklist.id];
         this.router.navigate(link);
     }

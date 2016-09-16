@@ -3,11 +3,11 @@ import { Router, Resolve,
          ActivatedRouteSnapshot }   from '@angular/router';
 import { Observable }               from 'rxjs/Observable';
 
-import { Checklist,
-         ChecklistService }         from './';
+import { Note }                     from '../../notes';
+import { ChecklistService }         from './';
 
 @Injectable()
-export class ChecklistResolve implements Resolve<Checklist> {
+export class ChecklistResolve implements Resolve<Note> {
     constructor(private checklistService: ChecklistService,
                 private router: Router) {}
     
