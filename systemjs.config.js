@@ -10,7 +10,8 @@
     'angular2-in-memory-web-api':	'node_modules/angular2-in-memory-web-api',
     'rxjs':							'node_modules/rxjs',
     'checklists':   '/app/checklists',
-    'shared':       '/app/checklists/shared'
+    'shared':       '/app/checklists/shared',
+    'notes':        '/app/notes'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
@@ -18,7 +19,8 @@
     'rxjs':             			{ defaultExtension: 'js' },
     'angular2-in-memory-web-api':   { main: 'index.js', defaultExtention: 'js' },
     'checklists': { main: 'index' },
-    'shared': { main: 'index' }
+    'shared': { main: 'index' },
+    'notes':  { main: 'index' }
   };
   var ngPackageNames = [
     'common',

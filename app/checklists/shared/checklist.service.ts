@@ -34,7 +34,7 @@ export class ChecklistService {
 		}
 		return promise
 				.then(checklist => { 
-					console.info(`saved list ${checklist.name}`);
+					console.info(`saved list ${checklist.title}`);
 					return checklist;
 				});
 	}

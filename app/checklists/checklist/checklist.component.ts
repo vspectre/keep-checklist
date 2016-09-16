@@ -38,19 +38,19 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 	addItem(): void {
 		let itemValue = this.newItem;
 		this.newItem = '';
-		var length = this.checklist.items.length + 1;
-		this.checklist.items.push({id: length, checked: false, description: itemValue });
+		var length = this.checklist.content.length + 1;
+		this.checklist.content.push({id: length, checked: false, description: itemValue });
 		
 		this.checklistService.save(this.checklist)
 				.then(() => {
-					console.info(`'${itemValue}' added to checklist ${this.checklist.name}`);
+					console.info(`'${itemValue}' added to checklist ${this.checklist.title}`);
 				});
 	}
 
 	removeItem(item: ChecklistItem): void {
-		for(var i = this.checklist.items.length -1; i >= 0; i--) {
-			if (this.checklist.items[i].id === item.id) {
-				this.checklist.items.splice(i, 1);
+		for(var i = this.checklist.content.length -1; i >= 0; i--) {
+			if (this.checklist.content[i].id === item.id) {
+				this.checklist.content.splice(i, 1);
 			}
 		}
 
@@ -58,12 +58,15 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 					.then(() => console.info(`item ${item.id} deleted`));
 	}
 
-	activeItems() { return this.checklist.items.filter(item => !item.checked); }
-	doneItems() { return this.checklist.items.filter(item => item.checked); }
+	activeItems() { return this.checklist.content.filter(item => !item.checked); }
+	doneItems() { return this.checklist.content.filter(item => item.checked); }
 
 	private setChecklist(): void {
 		this.route.data.forEach((data: { checklist: Checklist }) => {
 			this.checklist = data.checklist;
+			if (!(this.checklist.content as ChecklistItem[])) {
+				throw new TypeError('note is not a list');
+			}
 			this.allowEdit = this.checklist.id % 2 === 0;
 		});
 	}

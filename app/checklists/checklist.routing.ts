@@ -9,4 +9,9 @@ const routes: Routes = [
     { path: '', component: ChecklistsComponent },
     { path: ':id', component: ChecklistComponent, resolve: { checklist: ChecklistResolve } }
 ];
+
+export const routingProviders: any[] = [
+    ChecklistResolve
+];
+
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
