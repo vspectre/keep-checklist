@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute }           from '@angular/router';
 
-import { Note }             from './note';
+import { Note }             from '../';
 
 @Component({
     moduleId: module.id,
@@ -14,16 +14,15 @@ export class NoteComponent implements OnInit {
     @Input()allowEdit = true;
     titlePlaceHolder = "Title";
 
+    constructor(private route: ActivatedRoute){}
+
     ngOnInit() {
         this.setNote();
     }
 
     private setNote() {
-        this.note = { 
-            id: 100,
-            title: 'General Note',
-            type: 'note',
-            content: 'Your note goes here in the body' 
-        };
+        this.route.data.forEach((data: { note: Note }) => {
+            this.note = data.note;
+        });
     }
 }

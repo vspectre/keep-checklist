@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Note } from './note';
-import { NoteComponent } from './note.component'; 
+import { Note, NoteComponent }      from '../';
 
 @Component({
     moduleId: module.id,

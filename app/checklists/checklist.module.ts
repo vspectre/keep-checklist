@@ -10,6 +10,7 @@ import { NoteModule }               from '../notes/note.module';
 import { ChecklistsComponent }      from './checklists/checklists.component';
 import { ChecklistComponent }		from './checklist/checklist.component';
 import { ChecklistItemComponent }	from './checklist-item/checklist-item.component';
+import { ListBodyComponent }        from './list-body.component';
 
 import { routing,
          routingProviders }         from './checklist.routing';
@@ -27,6 +28,10 @@ import { ChecklistService }			from './shared/checklist.service';
         ChecklistsComponent,
         ChecklistComponent,
 		ChecklistItemComponent,
+        ListBodyComponent
+    ],
+    entryComponents: [
+        ListBodyComponent
     ],
     exports: [
         CommonModule,

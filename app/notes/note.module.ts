@@ -1,38 +1,41 @@
 import { NgModule }         from '@angular/core';
 import { CommonModule }     from '@angular/common';
 import { FormsModule }      from '@angular/forms';
+import { HttpModule }       from '@angular/http';
 
 import { SharedModule }     from '../shared/shared.module';
 
-import { NoteComponent }    from './note.component';
-import { NoteBodyComponent } from './note-body.component';
-import { ListBodyComponent } from './list-body.component';
-import { noteRouting, 
-         noteRoutingProviders }    from './note.routing';
+import { NoteComponent,
+         NoteBodyComponent,
+         noteRouting, 
+         noteRoutingProviders }    from './';
+import { NoteService }			from './shared/note.service';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        HttpModule,
         SharedModule,
-        noteRouting
+        noteRouting,
+        
     ],
     exports: [
         CommonModule,
         FormsModule,
-        SharedModule
+        HttpModule,
+        SharedModule,
     ],
     declarations: [
         NoteComponent,
-        NoteBodyComponent,
-        ListBodyComponent
+        NoteBodyComponent
     ],
     entryComponents: [
-        NoteBodyComponent,
-        ListBodyComponent
+        NoteBodyComponent
     ],
     providers: [
-        noteRoutingProviders
+        noteRoutingProviders,
+        NoteService
     ],
 })
 export class NoteModule { }

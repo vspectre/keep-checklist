@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate {
             return true; 
         }
 
+        console.warn('not logged in');
         this.authService.redirectUrl = state.url;
 
         let sessionId = 132456789;

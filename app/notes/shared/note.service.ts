@@ -3,49 +3,50 @@ import { Headers, Http, Response }	from '@angular/http';
 
 import '../../rxjs-operators';
 
-import { Note }		from '../../notes';
+import { Note }		from './note';
 
 @Injectable()
-export class ChecklistService {
+export class NoteService {
 	
-	private checklistsUrl = 'app/notes';	// URL to web api
+	private notesUrl = 'app/notes';	// URL to web api
 	
 	constructor(public http: Http) { }
 
-	getChecklists(): Promise<Note[]> {
-		return this.http.get(this.checklistsUrl)
+	getAll(): Promise<Note[]> {
+		return this.http
+			.get(this.notesUrl)
 			.toPromise()
 			.then(this.extractData)
 			.catch(this.handleError);
 	}
 	
-	getChecklist(id: number) {
-		return this.getChecklists()
+	get(id: number) {
+		return this.getAll()
 			.then(checklists => checklists.find(checklist => checklist.id === id));
 	}
 
-	save(checklist: Note): Promise<Note> {
+	save(note: Note): Promise<Note> {
 		var promise = null;
-		if (checklist.id) {
-			promise = this.put(checklist);
+		if (note.id) {
+			promise = this.put(note);
 		}
 		else {
-			promise = this.post(checklist);
+			promise = this.post(note);
 		}
 		return promise
-				.then(checklist => { 
-					console.info(`saved list ${checklist.title}`);
-					return checklist;
+				.then(note => { 
+					console.info(`saved note ${note.title}`);
+					return note;
 				});
 	}
 
-	private post(checklist: Note): Promise<Note> {
+	private post(note: Note): Promise<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
 
 		return this.http
-			.post(this.checklistsUrl, JSON.stringify(checklist), { headers: headers })
+			.post(this.notesUrl, JSON.stringify(note), { headers: headers })
 			.toPromise()
 			.then(this.extractData)
 			.catch(this.handleError);
@@ -56,7 +57,7 @@ export class ChecklistService {
 			'Content-Type': 'application/json'
 		});
 
-		let url = `${this.checklistsUrl}/${checklist.id}`;
+		let url = `${this.notesUrl}/${checklist.id}`;
 		
 		return this.http
 			.put(url, JSON.stringify(checklist), { headers: headers })

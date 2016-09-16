@@ -1,7 +1,7 @@
 export * from './note.module';
 
-export * from './note';
-export * from './note.component';
-export * from './note-body.component';
+export * from './shared/index';
+export * from './note/note.component';
+export * from './note-body/note-body.component';
 export * from './note-resolve.service';
 export * from './note.routing';
