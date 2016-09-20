@@ -22,7 +22,7 @@ export class NoteService {
 	
 	get(id: number) {
 		return this.getAll()
-			.then(checklists => checklists.find(checklist => checklist.id === id));
+			.then(notes => notes.find(note => note.id === id));
 	}
 
 	save(note: Note): Promise<Note> {
@@ -52,17 +52,17 @@ export class NoteService {
 			.catch(this.handleError);
 	}
 
-	private put(checklist: Note): Promise<Note> {
+	private put(note: Note): Promise<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
 
-		let url = `${this.notesUrl}/${checklist.id}`;
+		let url = `${this.notesUrl}/${note.id}`;
 		
 		return this.http
-			.put(url, JSON.stringify(checklist), { headers: headers })
+			.put(url, JSON.stringify(note), { headers: headers })
 			.toPromise()
-			.then(() => checklist)
+			.then(() => note)
 			.catch(this.handleError);
 	}
 
@@ -71,8 +71,12 @@ export class NoteService {
 		return json.data || { };
 	}
 
-	private handleError(error: any): Promise<any> {
-		console.error('an error occurred', error);
-		return Promise.reject(error.message || error);
-	}
+	private handleError (error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We'd also dig deeper into the error to get a better message
+    let errMsg = (error.message) ? error.message :
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg); // log to console instead
+    return Promise.reject(errMsg);
+  }
 }

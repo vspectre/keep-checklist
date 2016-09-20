@@ -64,8 +64,8 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 	private setChecklist(): void {
 		this.route.data.forEach((data: { checklist: Note }) => {
 			this.checklist = data.checklist;
-			if (!(this.checklist.content as ChecklistItem[])) {
-				throw new TypeError('note is not a list');
+			if (!(this.checklist.content instanceof Array)) {
+				this.checklist.content = (this.checklist.content as String).split(' ');
 			}
 			this.allowEdit = this.checklist.id % 2 === 0;
 		});

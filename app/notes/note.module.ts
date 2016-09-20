@@ -1,5 +1,4 @@
 import { NgModule }         from '@angular/core';
-import { CommonModule }     from '@angular/common';
 import { FormsModule }      from '@angular/forms';
 import { HttpModule }       from '@angular/http';
 
@@ -13,15 +12,12 @@ import { NoteService }			from './shared/note.service';
 
 @NgModule({
     imports: [
-        CommonModule,
         FormsModule,
         HttpModule,
         SharedModule,
         noteRouting,
-        
     ],
     exports: [
-        CommonModule,
         FormsModule,
         HttpModule,
         SharedModule,
@@ -35,7 +31,7 @@ import { NoteService }			from './shared/note.service';
     ],
     providers: [
         noteRoutingProviders,
-        NoteService
+        //NoteService
     ],
 })
 export class NoteModule { }

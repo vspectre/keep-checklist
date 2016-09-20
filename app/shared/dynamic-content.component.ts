@@ -20,7 +20,7 @@ import { ActivatedRoute }           from '@angular/router';
 })
 export class DynamicContentComponent implements OnChanges, OnDestroy, AfterViewInit {
     @ViewChild('target', { read: ViewContainerRef })target;
-    type;
+    type: any;
     content: ComponentRef<any>;
     private isViewInitialized: boolean = false;
 

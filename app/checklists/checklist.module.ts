@@ -1,5 +1,4 @@
 import { NgModule }     from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule }  from '@angular/forms';
 import { HttpModule }			from '@angular/http';
 
@@ -12,18 +11,17 @@ import { ChecklistComponent }		from './checklist/checklist.component';
 import { ChecklistItemComponent }	from './checklist-item/checklist-item.component';
 import { ListBodyComponent }        from './list-body.component';
 
-import { routing,
-         routingProviders }         from './checklist.routing';
+import { checklistRouting,
+         checklistRoutingProviders }         from './checklist.routing';
 import { ChecklistService }			from './shared/checklist.service';
 
 @NgModule({
     imports: [ 
-        CommonModule,
         FormsModule,
         HttpModule,
         SharedModule,
         NoteModule,
-        routing ],
+        checklistRouting ],
     declarations: [
         ChecklistsComponent,
         ChecklistComponent,
@@ -34,15 +32,13 @@ import { ChecklistService }			from './shared/checklist.service';
         ListBodyComponent
     ],
     exports: [
-        CommonModule,
         FormsModule,
         HttpModule,
-        NoteModule,
+        //NoteModule,
         SharedModule
     ],
     providers: [
-        ChecklistService,
-        routingProviders
+        checklistRoutingProviders
     ]
 })
 export class ChecklistModule { }

@@ -5,16 +5,14 @@ import { NoteComponent,
          NoteBodyComponent,
          NoteResolve }              from './';
 
-const routes: Routes = [
-    { path: ':id',
-      component: NoteComponent, 
-      resolve: { note: NoteResolve },
+const noteRoutes: Routes = [
+    { path: ':id', component: NoteComponent,
       data: { contentType: NoteBodyComponent }
-    },
+    }
 ]
 
 export const noteRoutingProviders: any[] = [
-    NoteResolve
+    //NoteResolve
 ];
 
-export const noteRouting: ModuleWithProviders = RouterModule.forChild(routes);
+export const noteRouting: ModuleWithProviders = RouterModule.forChild(noteRoutes);

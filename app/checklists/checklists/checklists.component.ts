@@ -23,14 +23,6 @@ export class ChecklistsComponent implements OnInit {
                 private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        this.sessionId = this.route
-                            .queryParams
-                            .map(params => params['session_id'] || 'None');
-
-        this.token = this.route
-                        .fragment
-                        .map(fragment => fragment || 'None');
-
         this.getChecklists();
     }
 
@@ -38,7 +30,7 @@ export class ChecklistsComponent implements OnInit {
         this.checklists = this.checklistService.getChecklists();
         this.checklists.then(checklists => 
             checklists.forEach(checklist => {
-                if (checklist.content.length > 3) {
+                if (checklist.content.length > 3 && checklist.content instanceof Array) {
                     checklist.content = checklist.content.filter(item => !item.checked);
                 }
             }));

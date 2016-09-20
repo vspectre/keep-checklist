@@ -15,12 +15,10 @@ export class NoteBodyComponent implements OnInit {
     note: Note;
     allowEdit = true;
 
-    constructor(parent: NoteComponent) {
-        this.note = parent.note;
-        this.allowEdit = parent.allowEdit;
-    }
+    constructor(private parent: NoteComponent) {}
 
     ngOnInit() {
-        
+        this.note = this.parent.note;
+        this.allowEdit = this.parent.allowEdit;
     }
 }

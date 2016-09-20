@@ -1,23 +1,32 @@
-import { NgModule } from '@angular/core';
+import { NgModule }                     from '@angular/core';
+import { CommonModule }                 from '@angular/common';
 
-import { FocusDirective }       from './focus.directive';
-import { DynamicContentComponent }       from './dynamic-content.component';
-
-// Imports for loading & configuring the in-memory web api
-import { XHRBackend }			from '@angular/http';
-import { InMemoryBackendService, SEED_DATA }	from 'angular2-in-memory-web-api';
-import { InMemoryDataService } 	from '../in-memory-data.service';
+import { FocusDirective }               from './focus.directive';
+import { DynamicContentComponent }      from './dynamic-content.component';
+import { ErrorComponent }               from './error/error.component';
+import { sharedRoutes,
+         sharedRouting,
+         sharedRoutingProviders }       from './shared.routing';
 
 @NgModule({
-    imports: [],
+    imports: [
+        CommonModule,
+        sharedRouting
+    ],
     declarations: [
         FocusDirective,
-        DynamicContentComponent
+        DynamicContentComponent,
+        ErrorComponent,
+        
     ],
-    exports: [ FocusDirective, DynamicContentComponent ],
+    exports: [
+        CommonModule,
+        FocusDirective,
+        DynamicContentComponent,
+        ErrorComponent
+    ],
     providers: [
-        { provide: XHRBackend, useClass: InMemoryBackendService },
-		{ provide: SEED_DATA, useClass: InMemoryDataService },
+        sharedRoutingProviders
     ],
 })
 export class SharedModule { }

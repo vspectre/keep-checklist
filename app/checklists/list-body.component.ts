@@ -16,13 +16,15 @@ export class ListBodyComponent implements OnInit {
         this.note = parent.note;
     }
 
-    ngOnInit() { 
-        if (this.note.content instanceof Array) {
-            this.items = this.note.content;
-        } else if (typeof this.note.content === 'string') {
-            this.items = (this.note.content as String).split(' ');
-        } else {
-            this.items = [ 'no content available.' ];
+    ngOnInit() {
+        if (this.note) {
+            if (this.note.content instanceof Array) {
+                this.items = this.note.content;
+            } else if (typeof this.note.content === 'string') {
+                this.items = (this.note.content as String).split(' ');
+            } else {
+                this.items = [ 'no content available.' ];
+            }
         }
     }
 }

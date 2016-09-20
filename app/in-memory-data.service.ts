@@ -1,4 +1,6 @@
-export class InMemoryDataService {
+import { InMemoryDbService }     from 'angular2-in-memory-web-api';
+
+export class InMemoryDataService implements InMemoryDataService {
     createDb() {
         let notes = [
             { id: 1, type: 'list', title: 'First Checklist', content: [

@@ -6,7 +6,7 @@ import { Observable }               from 'rxjs/Observable';
 import { Note, NoteService }        from './';
 
 @Injectable()
-export class NoteResolve implements Resolve<any> {
+export class NoteResolve implements Resolve<Note> {
     constructor(private noteService: NoteService,
                 private router: Router) {}
     

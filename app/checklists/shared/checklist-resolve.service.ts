@@ -18,7 +18,7 @@ export class ChecklistResolve implements Resolve<Note> {
             if (checklist) {
                 return checklist;
             } else {
-                this.router.navigate(['/']);
+                this.router.navigate(['/error']);
                 return false;
             }
         });
