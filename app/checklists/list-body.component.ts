@@ -6,14 +6,19 @@ import { Note,
 @Component({
     moduleId: module.id,
     selector: 'list-body',
-    templateUrl: 'list-body.component.html'
+    templateUrl: 'list-body.component.html',
+    host: {
+        'class.list-group': ''
+    }
 })
 export class ListBodyComponent implements OnInit {
     note: Note;
+    allowEdit = true;
     items: any[];
 
     constructor(parent: NoteComponent) {
         this.note = parent.note;
+        this.allowEdit = parent.allowEdit;
     }
 
     ngOnInit() {

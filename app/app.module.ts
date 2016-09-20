@@ -14,7 +14,6 @@ import { appRouting,
 		 appRoutingProviders }	from './app.routing';
 import { InMemoryDataService }	from './in-memory-data.service';
 import { NoteService }			from './notes/shared/note.service';
-import { ChecklistService }		from './checklists/shared/checklist.service';
 
 @NgModule({
 	imports: [
@@ -31,7 +30,6 @@ import { ChecklistService }		from './checklists/shared/checklist.service';
 	providers: [
 		//Http,
 		NoteService,
-		ChecklistService,
 		appRoutingProviders		
 	],
 	bootstrap: [ AppComponent ]

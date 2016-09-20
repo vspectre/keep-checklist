@@ -4,8 +4,7 @@ import { ActivatedRoute,
 import { Observable }           from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { Note }                 from '../../notes';
-import { ChecklistService }     from '../shared';
+import { Note, NoteService }    from '../../notes';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +17,7 @@ export class ChecklistsComponent implements OnInit {
     sessionId: Observable<string>;
     token: Observable<string>;
 
-    constructor(private checklistService: ChecklistService,
+    constructor(private noteService: NoteService,
                 private router: Router,
                 private route: ActivatedRoute) { }
 
@@ -27,7 +26,7 @@ export class ChecklistsComponent implements OnInit {
     }
 
     private getChecklists() {
-        this.checklists = this.checklistService.getChecklists();
+        this.checklists = this.noteService.getAll();
         this.checklists.then(checklists => 
             checklists.forEach(checklist => {
                 if (checklist.content.length > 3 && checklist.content instanceof Array) {

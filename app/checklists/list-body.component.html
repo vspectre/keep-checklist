@@ -1,3 +1,4 @@
-<div *ngFor="let item of items">
-    <p>{{ item }}</p>
-</div>
+	<checklist-item class="list-group-item" keepFocus
+					[allowEdit]="allowEdit"
+					*ngFor="let item of items"
+					[item]="item"></checklist-item>

@@ -3,9 +3,8 @@ import { ActivatedRoute }				from '@angular/router';
 
 import { Subscription }			from 'rxjs/Subscription';
 
-import { Note }					from '../../notes';
-import { ChecklistItem,
-		 ChecklistService }		from '../';
+import { Note, NoteService }	from '../../notes';
+import { ChecklistItem }		from '../';
 
 @Component({
 	moduleId: module.id,
@@ -23,7 +22,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private route: ActivatedRoute,
-		private checklistService: ChecklistService) { }
+		private noteService: NoteService) { }
 	
 	ngOnInit(): void {
 		this.setChecklist();
@@ -41,7 +40,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 		var length = this.checklist.content.length + 1;
 		this.checklist.content.push({id: length, checked: false, description: itemValue });
 		
-		this.checklistService.save(this.checklist)
+		this.noteService.save(this.checklist)
 				.then(() => {
 					console.info(`'${itemValue}' added to checklist ${this.checklist.title}`);
 				});
@@ -54,7 +53,7 @@ export class ChecklistComponent implements OnInit, OnDestroy {
 			}
 		}
 
-		this.checklistService.save(this.checklist)
+		this.noteService.save(this.checklist)
 					.then(() => console.info(`item ${item.id} deleted`));
 	}
 

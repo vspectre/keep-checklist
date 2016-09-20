@@ -23,7 +23,8 @@ export class NoteComponent implements OnInit {
     }
 
     private setNote() {
-        this.note = new Note();
+        //this.note = new Note();
+        
         // this.route.params.forEach((params: Params) => {
         //     let id = +params['id'];
 
@@ -31,8 +32,9 @@ export class NoteComponent implements OnInit {
         //         this.note = note;
         //     });
         // });
-        // this.route.data.forEach((data: { note: Note }) => {
-        //     this.note = data.note;
-        // });
+
+        this.route.data.forEach((data: { note: Note }) => {
+            this.note = data.note;
+        });
     }
 }

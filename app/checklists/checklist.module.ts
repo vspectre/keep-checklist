@@ -13,10 +13,9 @@ import { ListBodyComponent }        from './list-body.component';
 
 import { checklistRouting,
          checklistRoutingProviders }         from './checklist.routing';
-import { ChecklistService }			from './shared/checklist.service';
 
 @NgModule({
-    imports: [ 
+    imports: [
         FormsModule,
         HttpModule,
         SharedModule,

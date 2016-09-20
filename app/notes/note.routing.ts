@@ -7,12 +7,13 @@ import { NoteComponent,
 
 export const noteRoutes: Routes = [
     { path: ':id', component: NoteComponent,
-      data: { contentType: NoteBodyComponent }
+      data: { contentType: NoteBodyComponent },
+      resolve: { note: NoteResolve } 
     }
 ]
 
 export const noteRoutingProviders: any[] = [
-    //NoteResolve
+    NoteResolve
 ];
 
 export const noteRouting: ModuleWithProviders = RouterModule.forChild(noteRoutes);
