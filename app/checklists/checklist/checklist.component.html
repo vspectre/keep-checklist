@@ -1,29 +1,23 @@
-<div *ngIf="checklist" class="panel panel-default center-block">
-<div class="panel-heading">
-	<input type="text" class="panel-title input-lg" 
-			[placeholder]="titleHolder"	[(ngModel)]="checklist.title">
-</div>
-<div class="list-group">
-	<checklist-item class="list-group-item" keepFocus
-					[allowEdit]="allowEdit"
-					*ngFor="let item of activeItems()"
-					(deleteRequest)="removeItem($event)"
-					[item]="item"></checklist-item>
-	<template [ngIf]="allowEdit">
-		<div class="list-group-item" keepFocus>
-			<span class="glyphicon glyphicon-plus"></span>
-			<input type="text" [(ngModel)]="newItem"
-					[placeholder]="newItemHolder" (keyup.enter)="addItem()">
-		</div>
-		<template [ngIf]="doneItems().length > 0">
-			<hr>
-			<p class="list-group-item">{{ doneItems().length }} Completed item(s)</p>
-		</template>
+<checklist-item class="list-group-item" keepFocus
+				[allowEdit]="allowEdit"
+				*ngFor="let item of activeItems()"
+				(deleteRequest)="removeItem($event)"
+				[item]="item">
+</checklist-item>
+<template [ngIf]="allowEdit">
+	<div class="list-group-item" keepFocus>
+		<span class="glyphicon glyphicon-plus"></span>
+		<input type="text" [(ngModel)]="newItem"
+				[placeholder]="newItemHolder" (keyup.enter)="addItem()">
+	</div>
+	<template [ngIf]="doneItems().length > 0">
+		<hr>
+		<p class="list-group-item">{{ doneItems().length }} Completed item(s)</p>
 	</template>
-	<checklist-item class="list-group-item" keepFocus
-						[allowEdit]="allowEdit"
-						*ngFor="let item of doneItems()"
-						(deleteRequest)="removeItem($event)" 
-						[item]="item"></checklist-item>
-</div>
-</div>
+</template>
+<checklist-item class="list-group-item" keepFocus
+				[allowEdit]="allowEdit"
+				*ngFor="let item of doneItems()"
+				(deleteRequest)="removeItem($event)" 
+				[item]="item">
+</checklist-item>

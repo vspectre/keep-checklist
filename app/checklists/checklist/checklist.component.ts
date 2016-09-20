@@ -3,7 +3,10 @@ import { ActivatedRoute }				from '@angular/router';
 
 import { Subscription }			from 'rxjs/Subscription';
 
-import { Note, NoteService }	from '../../notes';
+import { Note,
+		 NoteBody,
+		 NoteComponent,
+		 NoteService }	from '../../notes';
 import { ChecklistItem }		from '../';
 
 @Component({
@@ -12,61 +15,40 @@ import { ChecklistItem }		from '../';
 	templateUrl: 'checklist.component.html',
 	styleUrls: [ 'checklist.component.css' ]
 })
-export class ChecklistComponent implements OnInit, OnDestroy {
-	private sub: Subscription;
-	checklist: Note;
-	allowEdit = true;
-	newItem = '';
-	titleHolder = "Title";
-	newItemHolder = 'List item';
-
-	constructor(
-		private route: ActivatedRoute,
-		private noteService: NoteService) { }
+export class ChecklistComponent  extends NoteBody {
+    host_class: string;
 	
-	ngOnInit(): void {
-		this.setChecklist();
+	newItem = '';
+	newItemHolder = 'List item';
+	
+	constructor(parent: NoteComponent, private noteService: NoteService) {
+		super(parent);
+		this.host_class = 'list-group';
 	}
 
-	ngOnDestroy(): void {
-		if (this.sub) {
-			this.sub.unsubscribe();
-		}
-	}
-
-	addItem(): void {
+    addItem(): void {
 		let itemValue = this.newItem;
 		this.newItem = '';
-		var length = this.checklist.content.length + 1;
-		this.checklist.content.push({id: length, checked: false, description: itemValue });
+		var length = this.note.content.length + 1;
+		this.note.content.push({id: length, checked: false, description: itemValue });
 		
-		this.noteService.save(this.checklist)
+		this.noteService.save(this.note)
 				.then(() => {
-					console.info(`'${itemValue}' added to checklist ${this.checklist.title}`);
+					console.info(`'${itemValue}' added to checklist ${this.note.title}`);
 				});
 	}
 
 	removeItem(item: ChecklistItem): void {
-		for(var i = this.checklist.content.length -1; i >= 0; i--) {
-			if (this.checklist.content[i].id === item.id) {
-				this.checklist.content.splice(i, 1);
+		for(var i = this.note.content.length -1; i >= 0; i--) {
+			if (this.note.content[i].id === item.id) {
+				this.note.content.splice(i, 1);
 			}
 		}
 
-		this.noteService.save(this.checklist)
+		this.noteService.save(this.note)
 					.then(() => console.info(`item ${item.id} deleted`));
 	}
 
-	activeItems() { return this.checklist.content.filter(item => !item.checked); }
-	doneItems() { return this.checklist.content.filter(item => item.checked); }
-
-	private setChecklist(): void {
-		this.route.data.forEach((data: { checklist: Note }) => {
-			this.checklist = data.checklist;
-			if (!(this.checklist.content instanceof Array)) {
-				this.checklist.content = (this.checklist.content as String).split(' ');
-			}
-			this.allowEdit = this.checklist.id % 2 === 0;
-		});
-	}
+	activeItems() { return this.note.content.filter(item => !item.checked); }
+	doneItems() { return this.note.content.filter(item => item.checked); }
 }

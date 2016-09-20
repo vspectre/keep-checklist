@@ -28,7 +28,6 @@ import { NoteService }			from './notes/shared/note.service';
 		AppComponent,
 	],
 	providers: [
-		//Http,
 		NoteService,
 		appRoutingProviders		
 	],
