@@ -1,0 +1,8 @@
+<div class="panel-group">
+    <button class="panel panel-default" *ngFor="let note of notes | async" (click)="gotoDetail(note)">
+        <div class="panel-body">
+            {{ note.title }}
+            <span *ngIf="note.type === 'list'" class="badge">{{ note.content.length }}</span>
+        </div>
+    </button>
+</div>

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Note, NoteComponent }      from '../';
+import { NoteBody,
+         NoteComponent }            from '../';
 
 @Component({
     moduleId: module.id,
@@ -8,17 +9,15 @@ import { Note, NoteComponent }      from '../';
     templateUrl: 'note-body.component.html',
     styleUrls: [ 'note-body.component.css' ],
     host: {
-        'class.panel-body': ''
+        'class': 'host_class'
     }
 })
-export class NoteBodyComponent implements OnInit {
-    note: Note;
-    allowEdit = true;
+export class NoteBodyComponent extends NoteBody {
+    host_class: string;
 
-    constructor(private parent: NoteComponent) {}
+    constructor(parent: NoteComponent) {
+        super(parent);
 
-    ngOnInit() {
-        this.note = this.parent.note;
-        this.allowEdit = this.parent.allowEdit;
+        this.host_class = 'panel-body';
     }
 }

@@ -1,35 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 
 import { Note,
-         NoteComponent } from '../notes';
+		 NoteBody,
+         NoteComponent,
+         NoteService }          from '../notes';
+import { ChecklistItem }        from './';
 
 @Component({
     moduleId: module.id,
     selector: 'list-body',
     templateUrl: 'list-body.component.html',
+    styleUrls: [ 'list-body.component.css' ],
     host: {
-        'class.list-group': ''
+        'class': 'host_class'
     }
 })
-export class ListBodyComponent implements OnInit {
-    note: Note;
-    allowEdit = true;
-    items: any[];
+export class ListBodyComponent extends NoteBody {
+    host_class: string;
+	
+	newItem = '';
+	newItemHolder = 'List item';
+	
+	constructor(parent: NoteComponent, private noteService: NoteService) {
+		super(parent);
+		this.host_class = 'list-group';
+	}
 
-    constructor(parent: NoteComponent) {
-        this.note = parent.note;
-        this.allowEdit = parent.allowEdit;
-    }
+    addItem(): void {
+		let itemValue = this.newItem;
+		this.newItem = '';
+		var length = this.note.content.length + 1;
+		this.note.content.push({id: length, checked: false, description: itemValue });
+		
+		this.noteService.save(this.note)
+				.then(() => {
+					console.info(`'${itemValue}' added to checklist ${this.note.title}`);
+				});
+	}
 
-    ngOnInit() {
-        if (this.note) {
-            if (this.note.content instanceof Array) {
-                this.items = this.note.content;
-            } else if (typeof this.note.content === 'string') {
-                this.items = (this.note.content as String).split(' ');
-            } else {
-                this.items = [ 'no content available.' ];
-            }
-        }
-    }
+	removeItem(item: ChecklistItem): void {
+		for(var i = this.note.content.length -1; i >= 0; i--) {
+			if (this.note.content[i].id === item.id) {
+				this.note.content.splice(i, 1);
+			}
+		}
+
+		this.noteService.save(this.note)
+					.then(() => console.info(`item ${item.id} deleted`));
+	}
+
+	activeItems() { return this.note.content.filter(item => !item.checked); }
+	doneItems() { return this.note.content.filter(item => item.checked); }
 }

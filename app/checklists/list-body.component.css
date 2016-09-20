@@ -1,0 +1,25 @@
+:host {
+    overflow-y: auto;
+}
+
+:host >>> .list-group-item:not(.focused) {
+    border: none;
+}
+
+.focused {
+    border-width: 1px 0px;
+    margin-bottom: 0px;
+}
+
+:host >>> .glyphicon {
+    color: #666;
+}
+
+.glyphicon-plus {
+    margin-left: 20px;
+}
+
+hr {
+    margin: 5px 20px;
+}
+

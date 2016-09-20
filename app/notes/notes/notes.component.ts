@@ -8,15 +8,13 @@ import { Note, NoteService }    from '../../notes';
 
 @Component({
     moduleId: module.id,
-	selector: 'checklists',
-    templateUrl: 'checklists.component.html',
-    styleUrls: [ 'checklists.component.css']
+	selector: 'notes',
+    templateUrl: 'notes.component.html',
+    styleUrls: [ 'notes.component.css']
 })
-export class ChecklistsComponent implements OnInit {
-    checklists: Promise<Note[]>;
-    sessionId: Observable<string>;
-    token: Observable<string>;
-
+export class NotesComponent implements OnInit {
+    notes: Promise<Note[]>;
+    
     constructor(private noteService: NoteService,
                 private router: Router,
                 private route: ActivatedRoute) { }
@@ -26,17 +24,17 @@ export class ChecklistsComponent implements OnInit {
     }
 
     private getChecklists() {
-        this.checklists = this.noteService.getAll();
-        this.checklists.then(checklists => 
+        this.notes = this.noteService.getAll();
+        this.notes.then(checklists => 
             checklists.forEach(checklist => {
                 if (checklist.content.length > 3 && checklist.content instanceof Array) {
                     checklist.content = checklist.content.filter(item => !item.checked);
                 }
-            }));
+        }));
     }
 
-    gotoDetail(checklist: Note): void {
-        let link = [ 'checklists/', checklist.id];
+    gotoDetail(note: Note): void {
+        let link = [ note.type, note.id];
         this.router.navigate(link);
     }
 }

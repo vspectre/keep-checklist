@@ -4,7 +4,8 @@ import { HttpModule }       from '@angular/http';
 
 import { SharedModule }     from '../shared/shared.module';
 
-import { NoteComponent,
+import { NotesComponent,
+         NoteComponent,
          NoteBodyComponent,
          noteRoutes,
          noteRouting, 
@@ -25,7 +26,8 @@ import { NoteService }			from './shared/note.service';
     ],
     declarations: [
         NoteComponent,
-        NoteBodyComponent
+        NoteBodyComponent,
+        NotesComponent
     ],
     entryComponents: [
         NoteBodyComponent

@@ -25,7 +25,7 @@ export class InMemoryDataService implements InMemoryDataService {
                     { id: 12, checked: false, description: 'Juice' },
                 ]
             },
-            { id: 3, type: 'list', title: 'Note about Nothing', 
+            { id: 3, type: 'note', title: 'Note about Nothing', 
                 content: 'Not much to put here'
             }
         ];

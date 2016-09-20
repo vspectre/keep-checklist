@@ -1,3 +1,8 @@
+:host {
+    display: block;
+    padding: 5px 30px;
+}
+
 .panel-group .panel + .panel {
     margin-left: 10px;
 }

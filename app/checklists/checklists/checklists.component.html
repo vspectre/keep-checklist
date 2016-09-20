@@ -1,8 +1,0 @@
-<div class="panel-group">
-    <button class="panel panel-default" *ngFor="let checklist of checklists | async" (click)="gotoDetail(checklist)">
-        <div class="panel-body">
-            {{ checklist.title }}
-            <span class="badge">{{ checklist.content.length }}</span>
-        </div>
-    </button>
-</div>
