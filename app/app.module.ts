@@ -1,6 +1,8 @@
 import { NgModule }				from '@angular/core';
 import { BrowserModule }		from '@angular/platform-browser';
-import { Http, HttpModule }		from '@angular/http';
+import { Http,
+		 ConnectionBackend,
+		 HttpModule }			from '@angular/http';
 
 import { InMemoryWebApiModule }	from 'angular2-in-memory-web-api';
 
@@ -20,12 +22,14 @@ import { ChecklistService }		from './checklists/shared/checklist.service';
 		HttpModule,
 		InMemoryWebApiModule.forRoot(InMemoryDataService),
 		appRouting,
-		SharedModule
+		SharedModule,
+		NoteModule
 	],
 	declarations: [ 
 		AppComponent,
 	],
 	providers: [
+		//Http,
 		NoteService,
 		ChecklistService,
 		appRoutingProviders		

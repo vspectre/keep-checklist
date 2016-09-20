@@ -5,7 +5,7 @@ import { NoteComponent,
          NoteBodyComponent,
          NoteResolve }              from './';
 
-const noteRoutes: Routes = [
+export const noteRoutes: Routes = [
     { path: ':id', component: NoteComponent,
       data: { contentType: NoteBodyComponent }
     }

@@ -6,6 +6,7 @@ import { SharedModule }     from '../shared/shared.module';
 
 import { NoteComponent,
          NoteBodyComponent,
+         noteRoutes,
          noteRouting, 
          noteRoutingProviders }    from './';
 import { NoteService }			from './shared/note.service';
@@ -15,7 +16,7 @@ import { NoteService }			from './shared/note.service';
         FormsModule,
         HttpModule,
         SharedModule,
-        noteRouting,
+        //noteRouting,
     ],
     exports: [
         FormsModule,

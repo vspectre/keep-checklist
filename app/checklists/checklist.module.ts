@@ -20,8 +20,9 @@ import { ChecklistService }			from './shared/checklist.service';
         FormsModule,
         HttpModule,
         SharedModule,
-        NoteModule,
-        checklistRouting ],
+        //NoteModule,
+        checklistRouting 
+    ],
     declarations: [
         ChecklistsComponent,
         ChecklistComponent,
@@ -34,8 +35,8 @@ import { ChecklistService }			from './shared/checklist.service';
     exports: [
         FormsModule,
         HttpModule,
-        //NoteModule,
-        SharedModule
+        SharedModule,
+        //NoteModule
     ],
     providers: [
         checklistRoutingProviders
