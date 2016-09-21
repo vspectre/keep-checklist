@@ -13,7 +13,7 @@ export class NoteResolve implements Resolve<Note> {
     resolve(route: ActivatedRouteSnapshot): Observable<any> | Promise<any> | any {
         let id = +route.params['id'];
 
-        return this.noteService.get(id).then(note => {
+        return this.noteService.get(id).map(note => {
             if (note) {
                 return note;
             } else {

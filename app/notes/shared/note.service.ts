@@ -1,6 +1,7 @@
 import { Injectable }				from '@angular/core';
 import { Headers, Http, Response }	from '@angular/http';
 
+import { Observable }				from 'rxjs/Observable';
 import '../../rxjs-operators';
 
 import { Note }		from './note';
@@ -12,20 +13,25 @@ export class NoteService {
 	
 	constructor(public http: Http) { }
 
-	getAll(): Promise<Note[]> {
+	getAll(): Observable<Note[]> {
 		return this.http
 			.get(this.notesUrl)
-			.toPromise()
-			.then(this.extractData)
-			.catch(this.handleError);
+			.map(this.extractData);
+			// .toPromise()
+			// .then(this.extractData)
+			// .catch(this.handleError);
 	}
 	
-	get(id: number) {
+	get(id: number) : Observable<Note> {
 		return this.getAll()
-			.then(notes => notes.find(note => note.id === id));
+			.map(notes => notes
+				? notes.find(note => note.id === id)
+				: Observable.of<Note[]>([])
+			);
+			//.then(notes => notes.find(note => note.id === id));
 	}
 
-	save(note: Note): Promise<Note> {
+	save(note: Note): Observable<Note> {
 		var promise = null;
 		if (note.id) {
 			promise = this.put(note);
@@ -40,19 +46,17 @@ export class NoteService {
 				});
 	}
 
-	private post(note: Note): Promise<Note> {
+	private post(note: Note): Observable<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
 
 		return this.http
 			.post(this.notesUrl, JSON.stringify(note), { headers: headers })
-			.toPromise()
-			.then(this.extractData)
-			.catch(this.handleError);
+			.map(this.extractData);
 	}
 
-	private put(note: Note): Promise<Note> {
+	private put(note: Note): Observable<Note> {
 		let headers = new Headers({
 			'Content-Type': 'application/json'
 		});
@@ -61,9 +65,7 @@ export class NoteService {
 		
 		return this.http
 			.put(url, JSON.stringify(note), { headers: headers })
-			.toPromise()
-			.then(() => note)
-			.catch(this.handleError);
+			.map(() => note);
 	}
 
 	private extractData(response: Response) {

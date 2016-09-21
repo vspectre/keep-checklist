@@ -17,7 +17,6 @@ import { ChecklistItem }		from '../';
 })
 export class ChecklistComponent  extends NoteBody {
     host_class: string;
-	
 	newItem = '';
 	newItemHolder = 'List item';
 	
@@ -26,6 +25,9 @@ export class ChecklistComponent  extends NoteBody {
 		this.host_class = 'list-group';
 	}
 
+	activeItems() { return this.note.content.filter(item => !item.checked); }
+	doneItems() { return this.note.content.filter(item => item.checked); }
+
     addItem(): void {
 		let itemValue = this.newItem;
 		this.newItem = '';
@@ -33,9 +35,10 @@ export class ChecklistComponent  extends NoteBody {
 		this.note.content.push({id: length, checked: false, description: itemValue });
 		
 		this.noteService.save(this.note)
-				.then(() => {
-					console.info(`'${itemValue}' added to checklist ${this.note.title}`);
-				});
+				.subscribe(
+					note => console.info(`'${itemValue}' added to checklist ${this.note.title}`), 
+					error => this.handleError
+				);
 	}
 
 	removeItem(item: ChecklistItem): void {
@@ -46,9 +49,18 @@ export class ChecklistComponent  extends NoteBody {
 		}
 
 		this.noteService.save(this.note)
-					.then(() => console.info(`item ${item.id} deleted`));
+					.subscribe(
+						note => console.info(`item ${item.id} deleted`),
+						error => this.handleError
+					);
 	}
 
-	activeItems() { return this.note.content.filter(item => !item.checked); }
-	doneItems() { return this.note.content.filter(item => item.checked); }
+	private handleError (error: any) {
+		// In a real world app, we might use a remote logging infrastructure
+		// We'd also dig deeper into the error to get a better message
+		let errMsg = (error.message) ? error.message :
+		error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+		console.error(errMsg); // log to console instead
+		return Promise.reject(errMsg);
+	}
 }

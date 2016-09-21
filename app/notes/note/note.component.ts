@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 
+import { Observable }               from 'rxjs/Observable';
+import { Subject }                  from 'rxjs/Subject';
 import { Note,
          NoteService }              from '../';
 
@@ -23,14 +25,10 @@ export class NoteComponent implements OnInit {
     }
 
     private setNote() {
-        //this.note = new Note();
-        
         // this.route.params.forEach((params: Params) => {
         //     let id = +params['id'];
-
-        //     this.noteService.get(id).then(note => {
-        //         this.note = note;
-        //     });
+            
+        //     this.note = this.noteService.get(id);
         // });
 
         this.route.data.forEach((data: { note: Note }) => {

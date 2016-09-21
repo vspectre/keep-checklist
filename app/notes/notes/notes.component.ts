@@ -13,7 +13,7 @@ import { Note, NoteService }    from '../../notes';
     styleUrls: [ 'notes.component.css']
 })
 export class NotesComponent implements OnInit {
-    notes: Promise<Note[]>;
+    notes: Observable<Note[]>;
     
     constructor(private noteService: NoteService,
                 private router: Router,
@@ -25,7 +25,7 @@ export class NotesComponent implements OnInit {
 
     private getChecklists() {
         this.notes = this.noteService.getAll();
-        this.notes.then(checklists => 
+        this.notes.subscribe(checklists => 
             checklists.forEach(checklist => {
                 if (checklist.content.length > 3 && checklist.content instanceof Array) {
                     checklist.content = checklist.content.filter(item => !item.checked);
