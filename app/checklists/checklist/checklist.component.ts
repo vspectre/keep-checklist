@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy }		from '@angular/core';
+import { Component, OnInit, OnDestroy }		from '@angular/core';
 import { ActivatedRoute }				from '@angular/router';
 
 import { Subscription }			from 'rxjs/Subscription';
@@ -6,21 +6,22 @@ import { Subscription }			from 'rxjs/Subscription';
 import { Note,
 		 NoteBody,
 		 NoteComponent,
-		 NoteService }	from '../../notes';
+		 NoteService }			from '../../notes';
 import { ChecklistItem }		from '../';
 
 @Component({
 	moduleId: module.id,
 	selector: 'checklist',
 	templateUrl: 'checklist.component.html',
-	styleUrls: [ 'checklist.component.css' ]
+	styleUrls: [ 'checklist.component.css' ],
 })
 export class ChecklistComponent  extends NoteBody {
     host_class: string;
 	newItem = '';
 	newItemHolder = 'List item';
 	
-	constructor(parent: NoteComponent, private noteService: NoteService) {
+	constructor(parent: NoteComponent, 
+				private noteService: NoteService) {
 		super(parent);
 		this.host_class = 'list-group';
 	}
@@ -29,24 +30,28 @@ export class ChecklistComponent  extends NoteBody {
 	doneItems() { return this.note.content.filter(item => item.checked); }
 
     addItem(): void {
-		let itemValue = this.newItem;
+		this.add(this.newItem);
 		this.newItem = '';
-		var length = this.note.content.length + 1;
-		this.note.content.push({id: length, checked: false, description: itemValue });
+	}
+
+	private add(itemValue: string, i?: number) {
+		let newItem = {id: 0, checked: false, description: itemValue };
+		if (!i || i >= this.note.content.length) {
+			i = this.note.content.length;
+		}
+		this.note.content.splice(i, 0, newItem);
 		
 		this.noteService.save(this.note)
 				.subscribe(
-					note => console.info(`'${itemValue}' added to checklist ${this.note.title}`), 
-					error => this.handleError
+					note => 
+						console.info(`'${newItem.id + ':' + newItem.description}' added to checklist ${note.title}`),
+					error =>
+						this.handleError
 				);
 	}
 
 	removeItem(item: ChecklistItem): void {
-		for(var i = this.note.content.length -1; i >= 0; i--) {
-			if (this.note.content[i].id === item.id) {
-				this.note.content.splice(i, 1);
-			}
-		}
+		this.note.content.splice(this.note.content.indexOf(item), 1);
 
 		this.noteService.save(this.note)
 					.subscribe(
@@ -61,6 +66,6 @@ export class ChecklistComponent  extends NoteBody {
 		let errMsg = (error.message) ? error.message :
 		error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 		console.error(errMsg); // log to console instead
-		return Promise.reject(errMsg);
+		//return Promise.reject(errMsg);
 	}
 }

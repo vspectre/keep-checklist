@@ -8,7 +8,7 @@ import { Note }		from './note';
 
 @Injectable()
 export class NoteService {
-	
+
 	private notesUrl = 'app/notes';	// URL to web api
 	
 	constructor(public http: Http) { }
@@ -17,9 +17,6 @@ export class NoteService {
 		return this.http
 			.get(this.notesUrl)
 			.map(this.extractData);
-			// .toPromise()
-			// .then(this.extractData)
-			// .catch(this.handleError);
 	}
 	
 	get(id: number) : Observable<Note> {
@@ -28,22 +25,18 @@ export class NoteService {
 				? notes.find(note => note.id === id)
 				: Observable.of<Note[]>([])
 			);
-			//.then(notes => notes.find(note => note.id === id));
 	}
 
 	save(note: Note): Observable<Note> {
-		var promise = null;
+		var observable: Observable<Note>;
 		if (note.id) {
-			promise = this.put(note);
+			observable = this.put(note);
 		}
 		else {
-			promise = this.post(note);
+			observable = this.post(note);
 		}
-		return promise
-				.then(note => { 
-					console.info(`saved note ${note.title}`);
-					return note;
-				});
+		return observable
+				.do(note => console.info(`saved note ${note.title}`), this.handleError);
 	}
 
 	private post(note: Note): Observable<Note> {
@@ -65,7 +58,8 @@ export class NoteService {
 		
 		return this.http
 			.put(url, JSON.stringify(note), { headers: headers })
-			.map(() => note);
+			.map(() => note)
+			.do(this.rekeyContent);
 	}
 
 	private extractData(response: Response) {
@@ -73,12 +67,24 @@ export class NoteService {
 		return json.data || { };
 	}
 
+	private rekeyContent(note: Note) {
+		// only doing this as a lazy way of mocking repository behavior
+		if (note.type === 'list') {
+			note.content.forEach((item, i) => {
+				item.id = i + 1;
+			});
+		}
+
+		return note;
+	}
+
 	private handleError (error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Promise.reject(errMsg);
-  }
+		// In a real world app, we might use a remote logging infrastructure
+		// We'd also dig deeper into the error to get a better message
+		let errMsg = (error.message) ? error.message :
+		error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+		console.error(errMsg); // log to console instead
+	}
+
+	
 }
