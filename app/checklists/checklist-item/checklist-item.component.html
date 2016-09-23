@@ -5,7 +5,8 @@
         [(ngModel)]="item.checked" [ngClass]="inputClasses()" [disabled]="!allowEdit">
 <span [ngClass]="inputClasses()" [ngSwitch]="allowEdit">
         <span *ngSwitchCase="false">{{ item.description }}</span>
-        <input *ngSwitchCase="true" type="text" [(ngModel)]="item.description">
+        <input *ngSwitchCase="true" type="text" [(ngModel)]="item.description"
+                [(keepInputWrap)]="item.description" [wrapIndex]="index">
 </span>
 <button *ngIf="active()" class="btn btn-lg transparent pull-right" (click)="remove()">
         <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>

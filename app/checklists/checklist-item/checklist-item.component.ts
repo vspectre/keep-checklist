@@ -22,10 +22,18 @@ import { ChecklistItem }    from '../';
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
     @Input()allowEdit: boolean = false;
+    @Input()index?: number;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
     activeFocus: boolean = false;
     active(): boolean { return this.allowEdit && (this.activeFocus); }
+    get itemState(): string {
+        return (this.allowEdit) 
+                    ? (this.item.checked)
+                        ? 'enabledAndActive'
+                        : 'enabled'
+                    : 'disabled';
+    }
 
     inputClasses() {
         let classes = {

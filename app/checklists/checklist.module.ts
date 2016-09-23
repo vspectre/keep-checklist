@@ -1,4 +1,4 @@
-import { NgModule }     from '@angular/core';
+import { NgModule, ElementRef }     from '@angular/core';
 import { FormsModule }  from '@angular/forms';
 import { HttpModule }			from '@angular/http';
 
@@ -7,10 +7,11 @@ import { SharedModule }             from '../shared/shared.module';
 import { NoteModule }               from '../notes/note.module';
 
 import { ChecklistComponent,
-         ChecklistItemComponent }   from './';
+         ChecklistItemComponent,
+         InputWrapDirective,
+         checklistRouting,
+         checklistRoutingProviders }   from './';
 
-import { checklistRouting,
-         checklistRoutingProviders }         from './checklist.routing';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { checklistRouting,
     ],
     declarations: [
         ChecklistComponent,
-		ChecklistItemComponent
+		ChecklistItemComponent,
+        InputWrapDirective
     ],
     entryComponents: [
         ChecklistComponent
@@ -30,9 +32,10 @@ import { checklistRouting,
         FormsModule,
         HttpModule,
         SharedModule,
+        InputWrapDirective
     ],
     providers: [
-        checklistRoutingProviders
+        checklistRoutingProviders,
     ]
 })
 export class ChecklistModule { }

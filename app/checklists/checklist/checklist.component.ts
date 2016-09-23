@@ -7,31 +7,73 @@ import { Note,
 		 NoteBody,
 		 NoteComponent,
 		 NoteService }			from '../../notes';
-import { ChecklistItem }		from '../';
+import { ChecklistItem,
+	     InputWrapService }			from '../';
 
 @Component({
 	moduleId: module.id,
 	selector: 'checklist',
 	templateUrl: 'checklist.component.html',
 	styleUrls: [ 'checklist.component.css' ],
+	providers: [
+		InputWrapService
+	]
 })
-export class ChecklistComponent  extends NoteBody {
+export class ChecklistComponent  extends NoteBody implements OnDestroy {
     host_class: string;
 	newItem = '';
 	newItemHolder = 'List item';
-	
-	constructor(parent: NoteComponent, 
-				private noteService: NoteService) {
-		super(parent);
-		this.host_class = 'list-group';
-	}
+	wrapForwardSubscription: Subscription;
+	wrapBackwardSubscription: Subscription;
 
 	activeItems() { return this.note.content.filter(item => !item.checked); }
 	doneItems() { return this.note.content.filter(item => item.checked); }
 
+	
+	constructor(parent: NoteComponent, 
+				private noteService: NoteService,
+				private inputWrapService: InputWrapService) {
+		super(parent);
+		this.host_class = 'list-group';
+	}
+
+	ngOnInit() {
+		super.ngOnInit();
+
+		this.inputWrapService.do(event => this.wrapBackward(event),
+								 event => this.wrapForward(event));
+	}
+
+	ngOnDestroy() {
+		if (this.wrapBackwardSubscription) {
+			this.wrapBackwardSubscription.unsubscribe();
+		}
+		if (this.wrapForwardSubscription) {
+			this.wrapForwardSubscription.unsubscribe();
+		}
+	}
+
+	
     addItem(): void {
-		this.add(this.newItem);
-		this.newItem = '';
+		if (this.newItem.length > 0) {
+			this.add(this.newItem);
+			this.newItem = '';
+		}
+	}
+
+	removeItem(item: ChecklistItem): void {
+		let index = this.note.content.indexOf(item);
+		this.remove(index);
+	}
+
+	private wrapBackward(event) {
+		console.debug(`back: ${JSON.stringify(event)}`);
+		this.remove(this.activeItems()[event.wrapIndex].id - 1);
+	}
+
+	private wrapForward(event) {
+		console.debug(`forward: ${JSON.stringify(event)}`);
+		this.add('', this.activeItems()[event.wrapIndex].id + 1);
 	}
 
 	private add(itemValue: string, i?: number) {
@@ -50,14 +92,15 @@ export class ChecklistComponent  extends NoteBody {
 				);
 	}
 
-	removeItem(item: ChecklistItem): void {
-		this.note.content.splice(this.note.content.indexOf(item), 1);
-
+	private remove(index: number): ChecklistItem {
+		let removedItem = this.note.content.splice(index, 1);
+		
 		this.noteService.save(this.note)
 					.subscribe(
-						note => console.info(`item ${item.id} deleted`),
+						note => console.info(`item ${removedItem.id} deleted`),
 						error => this.handleError
 					);
+		return removedItem;
 	}
 
 	private handleError (error: any) {

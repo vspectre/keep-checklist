@@ -1,14 +1,15 @@
-<checklist-item class="list-group-item" keepFocus
+<checklist-item class="list-group-item" keepFocus 
 				[allowEdit]="allowEdit"
-				*ngFor="let item of activeItems()"
+				*ngFor="let i = index; let item of activeItems()"
 				(deleteRequest)="removeItem($event)"
-				[item]="item">
+				[item]="item" [index]="i">
 </checklist-item>
 <template [ngIf]="allowEdit">
 	<div class="list-group-item" keepFocus>
 		<span class="glyphicon glyphicon-plus"></span>
-		<input type="text" [(ngModel)]="newItem"
-				[placeholder]="newItemHolder" (keyup.enter)="addItem()">
+		<input type="text" [(ngModel)]="newItem" 
+				[(keepInputWrap)]="newItem" [wrapIndex]="activeItems().length"
+				[placeholder]="newItemHolder">
 	</div>
 	<template [ngIf]="doneItems().length > 0">
 		<hr>
