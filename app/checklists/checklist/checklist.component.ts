@@ -56,9 +56,8 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 			this.wrapForwardSubscription.unsubscribe();
 		}
 	}
-
 	
-    addItem(): void {
+    addNewItem(): void {
 		if (this.newItem.length > 0) {
 			this.add(this.newItem);
 			this.newItem = '';
@@ -71,21 +70,25 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 	}
 
 	private wrapBackward(event) {
+		if (event.wrapIndex === this.activeItems().length) { return; }
 		let index = this.getOtherIndex(event.wrapIndex, this.activeItems(), this.note.content);
 		console.debug(`back: ${JSON.stringify(event)}. removing at ${index}`);
 		this.remove(index);
 	}
 
 	private wrapForward(event) {
-		let index = this.getOtherIndex(event.wrapIndex, this.activeItems(), this.note.content);
-		let index2 = this.getOtherIndex(index + 1, this.note.content, this.activeItems());
-		console.debug(`forward: ${JSON.stringify(event)}. adding at ${index}:${index2}`);
-		this.add(event.text, index);
+		console.debug(`forward: ${JSON.stringify(event)}`);
+		if (event.wrapIndex == this.activeItems().length) {
+			this.addNewItem();
+		} else {
+			let index = this.getOtherIndex(event.wrapIndex + 1, this.activeItems(), this.note.content);
+			this.add(event.text, index);
+		}		
 	}
 
 	private add(itemValue: string, i?: number) {
 		let newItem = {id: 0, checked: false, description: itemValue };
-		if (!i || i >= this.note.content.length) {
+		if (!i || i < 0 || i >= this.note.content.length) {
 			i = this.note.content.length;
 		}
 		this.note.content.splice(i, 0, newItem);
@@ -101,10 +104,10 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 
 	private remove(index: number): ChecklistItem {
 		let removedItem = this.note.content.splice(index, 1);
-		
+
 		this.noteService.save(this.note)
 					.subscribe(
-						note => console.info(`item ${removedItem.id} deleted`),
+						note => console.info(`item ${removedItem[0].id} deleted`),
 						error => this.handleError
 					);
 		return removedItem;
