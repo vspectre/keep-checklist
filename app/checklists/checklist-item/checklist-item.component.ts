@@ -22,7 +22,7 @@ import { ChecklistItem }    from '../';
 export class ChecklistItemComponent {
     @Input()item: ChecklistItem;
     @Input()allowEdit: boolean = false;
-    @Input()index?: number;
+    @Input()index: number;
     @Output()deleteRequest = new EventEmitter<ChecklistItem>();
 
     activeFocus: boolean = false;

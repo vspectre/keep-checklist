@@ -7,6 +7,7 @@ import { InputWrapDirective }       from './';
 
 @Injectable()
 export class InputWrapService {
+    //private inputs: {[index: number]: InputWrapDirective} = {};
     private inputs: InputWrapDirective[] = [];
     
     private wrapForward = new Subject<any>();
@@ -17,11 +18,12 @@ export class InputWrapService {
 
     constructor() {
         this.wrapBackward$.subscribe(event => this.onBack(event));
-        this.wrapForward$.subscribe(event => this.onForward(event));
+        //this.wrapForward$.subscribe(event => this.onForward(event));
     }
 
     registerInput(inputRef: InputWrapDirective, index: number): number {
         if (index >= 0) {
+            console.debug('register');
             this.inputs.splice(index, 0, inputRef);
         }
 
@@ -34,8 +36,8 @@ export class InputWrapService {
 
     do(onBack: (x: any) => void, onForward: (x: any) => void) {
         console.debug('do');
-        this.wrapBackward$ = this.wrapBackward$.do(onBack).do(event => this.onBack(event));
-        this.wrapForward$ = this.wrapForward$.do(onForward).do(event => this.onForward(event));
+        this.wrapBackward$.subscribe(onBack);
+        this.wrapForward$.subscribe(onForward);
     }
 
     back(event) {

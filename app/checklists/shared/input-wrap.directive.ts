@@ -16,7 +16,7 @@ export class InputWrapDirective implements OnInit, OnDestroy {
     @Input('keepInputWrap')inputValue: string;
     @Output('keepInputWrapChange')inputValueEmitter = new EventEmitter<string>();
     
-    @Input('wrapIndex')wrapIndex?: number = -1;
+    @Input('wrapIndex')wrapIndex: number = -1;
     
     constructor(private el: ElementRef,
                 private inputWrapService: InputWrapService) { }

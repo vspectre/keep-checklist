@@ -26,8 +26,12 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 	wrapForwardSubscription: Subscription;
 	wrapBackwardSubscription: Subscription;
 
-	activeItems() { return this.note.content.filter(item => !item.checked); }
-	doneItems() { return this.note.content.filter(item => item.checked); }
+	activeItems(): Array<ChecklistItem> { 
+		return this.note.content.filter(item => !item.checked);
+	}
+	doneItems(): Array<ChecklistItem> { 
+		return this.note.content.filter(item => item.checked);
+	}
 
 	
 	constructor(parent: NoteComponent, 
@@ -67,13 +71,16 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 	}
 
 	private wrapBackward(event) {
-		console.debug(`back: ${JSON.stringify(event)}`);
-		this.remove(this.activeItems()[event.wrapIndex].id - 1);
+		let index = this.getOtherIndex(event.wrapIndex, this.activeItems(), this.note.content);
+		console.debug(`back: ${JSON.stringify(event)}. removing at ${index}`);
+		this.remove(index);
 	}
 
 	private wrapForward(event) {
-		console.debug(`forward: ${JSON.stringify(event)}`);
-		this.add('', this.activeItems()[event.wrapIndex].id + 1);
+		let index = this.getOtherIndex(event.wrapIndex, this.activeItems(), this.note.content);
+		let index2 = this.getOtherIndex(index + 1, this.note.content, this.activeItems());
+		console.debug(`forward: ${JSON.stringify(event)}. adding at ${index}:${index2}`);
+		this.add(event.text, index);
 	}
 
 	private add(itemValue: string, i?: number) {
@@ -110,5 +117,9 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 		error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 		console.error(errMsg); // log to console instead
 		//return Promise.reject(errMsg);
+	}
+
+	private getOtherIndex(index: number, arrayFrom: Array<any>, arrayTo: Array<any>): number {
+		return arrayTo.indexOf(arrayFrom[index]);
 	}
 }
