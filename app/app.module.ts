@@ -6,30 +6,25 @@ import { Http,
 
 import { InMemoryWebApiModule }	from 'angular2-in-memory-web-api';
 
-import { NoteModule }			from './notes/note.module';
-import { SharedModule }			from './shared/shared.module';
+import { CoreModule }			from './core/core.module';
 
 import { AppComponent }			from './app.component';
 import { appRouting,
 		 appRoutingProviders }	from './app.routing';
 import { InMemoryDataService }	from './in-memory-data.service';
-import { NoteService }			from './notes/shared/note.service';
 
 @NgModule({
 	imports: [
 		BrowserModule,
-		HttpModule,
 		InMemoryWebApiModule.forRoot(InMemoryDataService),
 		appRouting,
-		SharedModule,
-		NoteModule
+		CoreModule
 	],
 	declarations: [ 
 		AppComponent,
 	],
 	providers: [
-		NoteService,
-		appRoutingProviders		
+		appRoutingProviders
 	],
 	bootstrap: [ AppComponent ]
 })

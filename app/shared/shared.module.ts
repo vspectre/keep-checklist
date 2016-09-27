@@ -1,5 +1,6 @@
 import { NgModule }                     from '@angular/core';
 import { CommonModule }                 from '@angular/common';
+import { FormsModule }                  from '@angular/forms';
 
 import { FocusDirective }               from './focus.directive';
 import { DynamicContentComponent }      from './dynamic-content.component';
@@ -11,16 +12,17 @@ import { sharedRoutes,
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         sharedRouting
     ],
     declarations: [
         FocusDirective,
         DynamicContentComponent,
-        ErrorComponent,
-        
+        ErrorComponent,        
     ],
     exports: [
         CommonModule,
+        FormsModule,
         FocusDirective,
         DynamicContentComponent,
         ErrorComponent
