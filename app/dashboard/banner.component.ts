@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -8,8 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
     @Input()title;
-    
-    constructor() { }
+    @Input()showMenu: boolean;
+    @Output()showMenuChange = new EventEmitter<boolean>();
 
     ngOnInit() { }
+
+    toggleMenu() {
+        this.showMenu = !this.showMenu;
+        this.showMenuChange.emit(this.showMenu);
+    }
 }

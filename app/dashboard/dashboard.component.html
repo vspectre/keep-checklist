@@ -1,5 +1,10 @@
-<banner [title]="title"></banner>
+<banner [title]="title" [(showMenu)]="showMenu"></banner>
 <div style="height: 94px"></div>
 <div class="container-fluid">
-    <ng-content></ng-content>
+    <aside [ngClass]="menuClasses()">
+        <ng-content [select]="asideSelector"></ng-content>
+    </aside>
+    <div [ngClass]="contentClasses()">
+        <ng-content></ng-content>
+    </div>
 </div>
