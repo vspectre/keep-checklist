@@ -4,11 +4,11 @@ import { RouterModule } from '@angular/router';
 import { InMemoryWebApiModule }	from 'angular-in-memory-web-api';
 
 import { SharedModule }			from '../shared/shared.module';
-import { NoteModule }   from '../notes/note.module';
+import { NoteModule }           from '../notes/note.module';
+import { DashboardModule }      from '../dashboard/dashboard.module';
 
-import { BannerComponent }   from './banner.component';
 import { NoteService }			from '../notes/shared/note.service';
-import { InMemoryDataService }	from '../in-memory-data.service';
+import { InMemoryDataService }	from './in-memory-data.service';
 
 @NgModule({
     imports: [
@@ -16,16 +16,16 @@ import { InMemoryDataService }	from '../in-memory-data.service';
         InMemoryWebApiModule.forRoot(InMemoryDataService),
 		RouterModule,
 		SharedModule,
-        NoteModule
+        NoteModule,
+        DashboardModule,
     ],
     exports: [
         RouterModule,
         SharedModule,
         NoteModule,
-        BannerComponent
+        DashboardModule,
     ],
     declarations: [
-        BannerComponent
     ],
     providers: [
         NoteService,

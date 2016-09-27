@@ -13,7 +13,7 @@ import { sharedRoutes,
     imports: [
         CommonModule,
         FormsModule,
-        sharedRouting
+        sharedRouting,
     ],
     declarations: [
         FocusDirective,
