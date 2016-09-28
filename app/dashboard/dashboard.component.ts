@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent {
     title: string = 'Ng2 Keep';
-    asideSelector = '.side-bar';
     showMenu: boolean;
 
     menuClasses() {
