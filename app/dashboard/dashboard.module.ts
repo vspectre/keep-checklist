@@ -5,7 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent,
          BannerComponent,
-         MenuComponent }      from './';
+         MenuComponent,
+         MenuService }      from './';
 
 @NgModule({
     imports: [
@@ -24,6 +25,8 @@ import { DashboardComponent,
         BannerComponent,
         MenuComponent
     ],
-    providers: [],
+    providers: [
+        MenuService
+    ],
 })
 export class DashboardModule { }

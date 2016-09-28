@@ -1,7 +1,7 @@
 <ul class="nav nav-pills nav-stacked">
     <li *ngFor="let item of items">
         <a class="text-muted" [routerLink]="item.route" routerLinkAcdtive="active">
-            <span [ngClass]="itemClasses(item.img)" aria-hidden="true"></span>
+            <span [ngClass]="itemClasses(item.glyphName)" aria-hidden="true"></span>
             <span>{{ item.text }}</span>
         </a>
     </li>

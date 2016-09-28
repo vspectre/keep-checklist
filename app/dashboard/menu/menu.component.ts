@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
+
+import { MenuService }          from '../menu.service';
 
 @Component({
     moduleId: module.id,
@@ -9,19 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
     items = [];
 
-    constructor() { }
+    constructor(private menuService: MenuService) { }
 
     ngOnInit() { 
-        this.items = MenuItems;
+        this.items = this.menuService.getItems();
     }
 
     itemClasses(imgClass: string) {
         return [ 'glyphicon', 'glyphicon-' + imgClass ];
     }
 }
-
-const MenuItems = [
-    { text: 'Notes', route: '/note', img: 'pencil' },
-    { text: 'Lists', route: '/list', img: 'th-list' },
-    { text: 'Settings', route: '/settings', img: 'cog' },
-]
