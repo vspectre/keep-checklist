@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent,
-         BannerComponent }      from './';
+         BannerComponent,
+         MenuComponent }      from './';
 
 @NgModule({
     imports: [
@@ -15,11 +16,13 @@ import { DashboardComponent,
         RouterModule,
         SharedModule,
         DashboardComponent,
-        BannerComponent
+        BannerComponent,
+        MenuComponent
     ],
     declarations: [
         DashboardComponent,
-        BannerComponent
+        BannerComponent,
+        MenuComponent
     ],
     providers: [],
 })

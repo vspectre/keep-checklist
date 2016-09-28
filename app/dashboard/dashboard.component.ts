@@ -13,7 +13,8 @@ export class DashboardComponent {
     menuClasses() {
         let classes = {
             hidden: !this.showMenu,
-            'col-xs-3': this.showMenu 
+            'col-xs-3': this.showMenu,
+            'keep-menu': true 
         }
 
         return classes;
