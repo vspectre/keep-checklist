@@ -1,0 +1,26 @@
+:host {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-width: 320px;
+    z-index: 986;
+}
+
+.navbar {
+    background-color: rgb(255, 187, 0);
+    border: none;
+    border-radius: 0;
+}
+
+.btn {
+    padding: 15px;
+    color: rgb(50,50,50);
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:active,
+.navbar-brand:focus {
+    color: black;
+    font-size: 20px;
+}
