@@ -1,7 +1,4 @@
-import { NgModule, ElementRef }     from '@angular/core';
-import { FormsModule }  from '@angular/forms';
-import { HttpModule }			from '@angular/http';
-
+import { NgModule }     from '@angular/core';
 
 import { SharedModule }             from '../shared/shared.module';
 import { NoteModule }               from '../notes/note.module';
@@ -15,9 +12,8 @@ import { ChecklistComponent,
 
 @NgModule({
     imports: [
-        FormsModule,
-        HttpModule,
         SharedModule,
+        NoteModule,
         checklistRouting 
     ],
     declarations: [
@@ -29,9 +25,8 @@ import { ChecklistComponent,
         ChecklistComponent
     ],
     exports: [
-        FormsModule,
-        HttpModule,
         SharedModule,
+        NoteModule,
         InputWrapDirective
     ],
     providers: [

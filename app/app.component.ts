@@ -6,9 +6,7 @@ import { Component, OnInit }	from '@angular/core';
 	templateUrl: 'app.component.html',
 })
 export class AppComponent {
-	title = 'Keep Checklist in Ng2';
 	
-	ngOnInit(): void {
-		
-	}
+	
+	ngOnInit() { }
 }

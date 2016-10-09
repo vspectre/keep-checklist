@@ -1,6 +1,4 @@
 import { NgModule }         from '@angular/core';
-import { FormsModule }      from '@angular/forms';
-import { HttpModule }       from '@angular/http';
 
 import { SharedModule }     from '../shared/shared.module';
 
@@ -14,14 +12,10 @@ import { NoteService }			from './shared/note.service';
 
 @NgModule({
     imports: [
-        FormsModule,
-        HttpModule,
         SharedModule,
         //noteRouting,
     ],
     exports: [
-        FormsModule,
-        HttpModule,
         SharedModule,
     ],
     declarations: [

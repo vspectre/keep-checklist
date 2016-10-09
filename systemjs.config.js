@@ -7,20 +7,22 @@
   var map = {
     'app':  						'app', // 'dist',
     '@angular':  					'node_modules/@angular',
-    'angular2-in-memory-web-api':	'node_modules/angular2-in-memory-web-api',
+    'angular-in-memory-web-api':	'node_modules/angular-in-memory-web-api',
     'rxjs':							'node_modules/rxjs',
     'checklists':   '/app/checklists',
     'shared':       '/app/checklists/shared',
-    'notes':        '/app/notes'
+    'notes':        '/app/notes',
+    'dashboard':    '/app/dashboard'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':              			{ main: './main.js',  defaultExtension: 'js' },
     'rxjs':             			{ defaultExtension: 'js' },
-    'angular2-in-memory-web-api':   { main: './index.js', defaultExtention: 'js' },
+    'angular-in-memory-web-api':   { main: './index.js', defaultExtention: 'js' },
     'checklists': { main: 'index' },
     'shared': { main: 'index' },
-    'notes':  { main: 'index' }
+    'notes':  { main: 'index' },
+    'dashboard': { main: 'index' }
   };
   var ngPackageNames = [
     'common',
