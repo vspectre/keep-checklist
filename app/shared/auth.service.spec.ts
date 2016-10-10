@@ -1,22 +1,30 @@
-import { AuthService }  from './auth.service';
+import { TestBed, inject }  from '@angular/core/testing';
+
+import { AuthService }      from './auth.service';
 import '../rxjs-operators';
 
 describe('AuthService', () => {
-    // This service is for user authentication, right now just a hallow implementation
-    let sut = new AuthService();
-
-    it('changes isLoggedIn to true', () => {
-        expect(sut.isLoggedIn).toBe(false);
-        sut.login()
-            .toPromise()
-            .then(() => expect(sut.isLoggedIn).toBe(true));
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [AuthService]
+        });
     });
-    
-    it('changes isLoggedIn to false', () => {
+
+    it('changes isLoggedIn to true',
+      inject([AuthService], (sut: AuthService) => {
+        expect(sut.isLoggedIn).toBe(false);
         sut.login()
             .toPromise()
             .then(() => expect(sut.isLoggedIn).toBe(true));
-        sut.logout();
-        expect(sut.isLoggedIn).toBe(false);
-    })
-})
+    }));
+    
+    it('changes isLoggedIn to false',
+      inject([AuthService], (sut: AuthService) => {
+        sut.login()
+            .toPromise()
+            .then(() => {
+                sut.logout();
+                expect(sut.isLoggedIn).toBe(false);
+        });
+    }));
+});
