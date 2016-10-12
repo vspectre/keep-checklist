@@ -12,7 +12,7 @@ class FocusTestComponent { }
 
 let fixture: ComponentFixture<FocusTestComponent>;
 let focusEl;
-let directive: FocusDirective;
+let sut: FocusDirective;
 
 describe('FocusDirective', () => {
     beforeEach(() => {
@@ -24,55 +24,55 @@ describe('FocusDirective', () => {
         .createComponent(FocusTestComponent);
 
         focusEl = fixture.debugElement.query(By.directive(FocusDirective));
-        directive = focusEl.injector.get(FocusDirective) as FocusDirective;
+        sut = focusEl.injector.get(FocusDirective) as FocusDirective;
     });
 
     it('should not be initially focused', () => {
-        expect(directive.activeFocus).toBe(false);
+        expect(sut.activeFocus).toBe(false);
     });
 
     it('should be focused when focusin triggered', () => {
         focusEl.triggerEventHandler('focusin', null);
-        expect(directive.focused).toBe(true);
+        expect(sut.focused).toBe(true);
     });
 
     it('should not be focused when focusout triggered', () => {
-        directive.focused = true;
+        sut.focused = true;
         focusEl.triggerEventHandler('focusout', null);
-        expect(directive.focused).toBe(false);
+        expect(sut.focused).toBe(false);
     });
 
     it('should be hovered when mouseenter triggered', () => {
         focusEl.triggerEventHandler('mouseenter', null);
-        expect(directive.hovered).toBe(true);
+        expect(sut.hovered).toBe(true);
     });
 
     it('should not be hovered when mouseleave triggered', () => {
-        directive.hovered = true;
+        sut.hovered = true;
         focusEl.triggerEventHandler('mouseleave', null);
-        expect(directive.hovered).toBe(false);
+        expect(sut.hovered).toBe(false);
     });
 
     it('should be marked activeFocus when focused', () => {
-        directive.focused = true;
-        expect(directive.activeFocus).toBe(true);
+        sut.focused = true;
+        expect(sut.activeFocus).toBe(true);
     });
 
     it('should be marked activeFocus when hovered', () => {
-        directive.hovered = true;
-        expect(directive.activeFocus).toBe(true);
+        sut.hovered = true;
+        expect(sut.activeFocus).toBe(true);
     });
 
     it('should add focus class when focused', () => {
         let className = 'testFocus';
-        directive.focusClass = className;
+        sut.focusClass = className;
         focusEl.triggerEventHandler('focusin', null);
         expect(focusEl.classes[className]).toBe(true);
     });
 
     it('should emit keepFocus event of true when focused', () => {
         let focusedState: boolean;
-        let sub = directive.keepFocus.subscribe((state: boolean) => focusedState = state);
+        let sub = sut.keepFocus.subscribe((state: boolean) => focusedState = state);
 
         focusEl.triggerEventHandler('focusin', null);
         expect(focusedState).toBe(true);
@@ -84,7 +84,7 @@ describe('FocusDirective', () => {
 
     it('should emit keepFocus event of false when unfocused', () => {
         let focusedState: boolean;
-        let sub = directive.keepFocus.subscribe((state: boolean) => focusedState = state);
+        let sub = sut.keepFocus.subscribe((state: boolean) => focusedState = state);
 
         focusEl.triggerEventHandler('focusout', null);
         expect(focusedState).toBe(false);
