@@ -3,7 +3,7 @@ import { Injectable, OnDestroy }    from '@angular/core';
 import { DoSignature }              from 'rxjs/operator/do';
 import { Subject }                  from 'rxjs/Subject';
 
-import { InputWrapDirective }       from './';
+import { WrapEvent, InputWrapDirective }       from './';
 
 @Injectable()
 export class InputWrapService {
@@ -40,7 +40,7 @@ export class InputWrapService {
         this.wrapForward$.subscribe(onForward);
     }
 
-    back(event) {
+    back(event: WrapEvent) {
         console.debug('back');
         let i = event.wrapIndex;
         if (i > 0 && i <= this.inputs.length) {
@@ -48,7 +48,7 @@ export class InputWrapService {
         }
     }
 
-    forward(event) {
+    forward(event: WrapEvent) {
         console.debug('forward');
         let i = event.wrapIndex;
         if (i <= this.inputs.length) {
@@ -56,14 +56,14 @@ export class InputWrapService {
         }
     }
 
-    private onBack(event) {
+    private onBack(event: WrapEvent) {
         console.debug('onBack');
         let i = event.wrapIndex - 1;
         let input = this.inputs[i];
         input.inputValueEmitter.next(input.inputValue + event.text);
     }
 
-    private onForward(event) {
+    private onForward(event: WrapEvent) {
         console.debug('onForward');
         let i = event.wrapIndex + 1;
         let input = this.inputs[i];

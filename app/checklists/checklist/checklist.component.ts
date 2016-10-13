@@ -8,7 +8,8 @@ import { Note,
 		 NoteComponent,
 		 NoteService }			from '../../notes';
 import { ChecklistItem,
-	     InputWrapService }			from '../';
+	     InputWrapService,
+		 WrapEvent }			from '../';
 
 @Component({
 	moduleId: module.id,
@@ -69,14 +70,14 @@ export class ChecklistComponent  extends NoteBody implements OnDestroy {
 		this.remove(index);
 	}
 
-	private wrapBackward(event) {
+	private wrapBackward(event: WrapEvent) {
 		if (event.wrapIndex === this.activeItems().length) { return; }
 		let index = this.getOtherIndex(event.wrapIndex, this.activeItems(), this.note.content);
 		console.debug(`back: ${JSON.stringify(event)}. removing at ${index}`);
 		this.remove(index);
 	}
 
-	private wrapForward(event) {
+	private wrapForward(event: WrapEvent) {
 		console.debug(`forward: ${JSON.stringify(event)}`);
 		if (event.wrapIndex == this.activeItems().length) {
 			this.addNewItem();
