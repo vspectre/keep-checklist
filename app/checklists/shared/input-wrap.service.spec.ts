@@ -7,6 +7,7 @@ function initInputs(sut: InputWrapService) {
     for (let i = 0; i < 5; i++) {
         let directive = new InputWrapDirective(null, sut);
         directive.wrapIndex = i;
+        directive.inputValue = `${i} - text`;
         inputs.push(directive);
         sut.registerInput(directive, i);
     }
@@ -67,4 +68,28 @@ describe('InputWrapService', () => {
 
         sut.forward(expected);
     });
+
+    it('should append value to previous input on wrap backward', () => {
+        let wrapText = 'wrapped text';
+        let event = new WrapEvent(1, wrapText);
+        let previousInput = inputs[event.wrapIndex - 1];
+        let spy = spyOn(previousInput, 'updateValue');
+        let expected = previousInput.inputValue + wrapText;
+
+        sut.back(event);
+
+        expect(spy).toHaveBeenCalledWith(expected);
+    });
+
+    it('should prepend value to next input on wrap forward', () => {
+        let wrapText = 'wrapped text';
+        let event = new WrapEvent(0, wrapText);
+        let nextInput = inputs[event.wrapIndex + 1];
+        let spy = spyOn(nextInput, 'updateValue');
+        let expected = wrapText + nextInput.inputValue;
+
+        sut.forward(event);
+
+        expect(spy).toHaveBeenCalledWith(expected);
+    })
 })

@@ -24,7 +24,7 @@ export class InputWrapDirective implements OnInit, OnDestroy {
     @HostListener('keyup.backspace', [ '$event' ]) onBackspace($event) {
         if (this.el.nativeElement.selectionStart === 0) {
             let textToWrap = this.inputValue;
-            this.inputValueEmitter.next('');
+            this.updateValue('');
             this.inputWrapService.back({ wrapIndex: this.wrapIndex, text: textToWrap });
         }
     }
@@ -34,7 +34,7 @@ export class InputWrapDirective implements OnInit, OnDestroy {
         let text = this.inputValue;
         let textToKeep = text.slice(0, position);
         let textToWrap = text.slice(position);
-        this.inputValueEmitter.emit(textToKeep);
+        this.updateValue(textToKeep);
         this.inputWrapService.forward({ wrapIndex: this.wrapIndex, text: textToWrap });
     }
 
@@ -44,5 +44,9 @@ export class InputWrapDirective implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.inputWrapService.removeInput(this);
+    }
+
+    updateValue(newValue: string) {
+        this.inputValueEmitter.next(newValue);
     }
 }
